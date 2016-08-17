@@ -1,0 +1,44 @@
+Name: Develop
+Protocol:
+  Secure: http
+  Normal: http
+Domain: kintai-system.com
+DBInfo:
+  main:
+    w: mysql://root:123456@localhost/kintaisys_db
+    r: mysql://root:123456@localhost/kintaisys_db
+DB:
+  SQLLib: ${AAFW_DIR}/plugins/db_sql
+CacheDir: ${AAFW_DIR}/cache
+
+Facebook:
+  Admin:
+    Permissions:
+      1: publish_actions
+      2: manage_pages
+
+MemcacheInfo:
+  port: 11211
+  server: localhost
+
+Log4php:
+  configFileName: logger_config.php
+  loggers:
+    batch-request:
+      level: DEBUG
+  appenders:
+    db:
+      dsn: mysql:host=localhost;dbname=kaintaisys_db
+      user: root
+      password: 123456
+      table: log4php_log
+    file:
+      name: /tmp/batch_request-%s.log
+Mail:
+  Default:
+    FromAddress: noreply@aainc.co.jp
+    BccAddress: 
+    Envelope: noreply@aainc.co.jp
+    Charset: ISO-2022-JP
+    RealCharset: ISO-2022-JP-MS
+      
