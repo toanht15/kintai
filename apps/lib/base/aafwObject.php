@@ -3,7 +3,6 @@ AAFW::import ( 'jp.aainc.aafw.base.aafwException' );
 AAFW::import ( 'jp.aainc.aafw.factory.aafwEntityStoreFactory' );
 AAFW::import ( 'jp.aainc.aafw.factory.aafwServiceFactory' );
 AAFW::import ( 'jp.aainc.aafw.factory.aafwLibraryFactory' );
-
 /**
  * 多くのオブジェクトの元になるヤツ
  * 雑多なメソッドとかいっぱい持ってる(^^;)
@@ -463,24 +462,24 @@ class aafwObject {
         }
     }
 
-	/******************************************
-	 * 文字が指定文字長かどうか判断する
-	 * @param $str 文字
-	 * @param $len  文字長
-	 * @return 真偽値
-	 ******************************************/
+    /******************************************
+     * 文字が指定文字長かどうか判断する
+     * @param $str 文字
+     * @param $len  文字長
+     * @return 真偽値
+     ******************************************/
 //    public function isStrLen( $str, $len ){
 //        if( !$str ) return true;
 //        return ( strlen( $str ) == $len );
 //    }
-	public function isStrLen( $str, $len ){
-		if( !$str ) return true;
-		if($len > strlen($str)) {
-			return true;
-		} else {
-			return false;
-		}
-	}
+    public function isStrLen( $str, $len ){
+        if( !$str ) return true;
+        if($len > strlen($str)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
 
     /******************************************
@@ -643,19 +642,19 @@ class aafwObject {
         return false;
     }
 
-	/******************************************
-	 * 半角英字かチェックする
-	 * @param $str 文字
-	 * @return 真偽値
-	 ******************************************/
-	public function isAlpha( $str ){
-		if( !$str ) return false;
-		if(preg_match('/^[a-zA-Z]*$/', $str) >= 1){
-			return true;
-		}else{
-			return false;
-		}
-	}
+    /******************************************
+     * 半角英字かチェックする
+     * @param $str 文字
+     * @return 真偽値
+     ******************************************/
+    public function isAlpha( $str ){
+        if( !$str ) return false;
+        if(preg_match('/^[a-zA-Z]*$/', $str) >= 1){
+            return true;
+        }else{
+            return false;
+        }
+    }
 
     /******************************************
      * 半角英数字かチェックする

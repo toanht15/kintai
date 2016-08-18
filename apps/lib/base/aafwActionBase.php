@@ -18,7 +18,7 @@ abstract class aafwActionBase extends aafwValidatorBase {
   protected $REQUEST = null;
   protected $ENV     = null;
 
-  protected $ErrorPage    = 'error_page.php';
+  protected $ErrorPage    = 'error_page.php'; 
   protected $Settings     = '';
   protected $AppConfig    = '';
   protected $WebSettings  = array();

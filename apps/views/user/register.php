@@ -7,7 +7,7 @@
 
 			<?php if ($this->ActionError): ?>
 				<div class="alert alert-error">
-					入力エラーが存在します。
+					Input error.
 				</div>
 			<?php endif; ?>
 
@@ -18,23 +18,14 @@
 				<p class="text-error"><?php assign($this->ActionError->getMessage('email')) ?></p>
 			<?php endif; ?>
 			
-			<?php write_html($this->formText('password', 'ActionForm', array("class" => "input-block-level",
+			<?php write_html($this->formPassword('password', 'ActionForm', array("class" => "input-block-level",
 				"placeholder" => "Password"))) ?>
 
 			<?php if ($this->ActionError && !$this->ActionError->isValid('password')): ?>
 				<p class="text-error"><?php assign($this->ActionError->getMessage('password')) ?></p>
 			<?php endif; ?>
 
-			<?php if ($this->ActionError && !$this->ActionError->isValid('login')): ?>
-				<p class="text-error"><?php assign($this->ActionError->getMessage('login')) ?></p>
-			<?php endif; ?>
 
-			<?php write_html($this->formPassword('password', 'ActionForm', array("class" => "input-block-level", "placeholder" => "Retype password"))) ?>
-
-			<?php if ($this->ActionError && !$this->ActionError->isValid('password')): ?>
-			<p class="text-error"><?php assign($this->ActionError->getMessage('password')) ?></p>
-			<p class="text-error"></p>
-			<?php endif; ?>
 			<button class="btn btn-large btn-primary" type="submit">Submit</button>
 		</form>
 </div>
