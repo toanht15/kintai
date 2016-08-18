@@ -47,10 +47,8 @@ class authenticate extends aafwPOSTActionBase {
 		} else {
 			// ユーザーの存在チェック
 			$service = $this->createService('UserService');
-
 			//メールの存在チェック
 			$user = $service->getUserByEmail($this->email);
-
 			if (!$user || ($user->status == 1)){
 				$this->Validator->setError('login', 'LOGIN_ERROR');
 			}
@@ -72,7 +70,7 @@ class authenticate extends aafwPOSTActionBase {
 			$this->SESSION['login_id'] = $this->Data['user']->id;
 			$service = $this->createService('UserService');
 			//$service->updateLastLogin($this->Data['user']);
-			$result = 'redirect: /index';
+			$result = 'redirect: /timesheet/index';
 			$this->Data['saved'] = 1;
 		} else {
 			$result = 'redirect: /user/login/';

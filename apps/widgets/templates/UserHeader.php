@@ -13,6 +13,8 @@
 	href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
 <link href="/lib/bootstrap/css/bootstrap-min-ex.css" rel="stylesheet"
 	media="screen">
+<link href="/lib/bootstrap/css/bootstrap-337.min.css" rel="stylesheet"
+	media="screen">
 <link rel="stylesheet" type="text/css"
 	href="http://yui.yahooapis.com/3.13.0/build/cssreset/cssreset-min.css">
 <link rel="stylesheet" href="/css/src/style.css">
