@@ -8,7 +8,6 @@ require_once 'aafwValidatorBase.php';
 require_once 'aafwValidator.php';
 require_once 'aafwApplicationConfig.php';
 require_once 'base/aafwActionBase.php';
-
 abstract class aafwGETActionBase extends aafwActionBase {
   public function doService( ) {
     if ( $this->POST )          return '404';

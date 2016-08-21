@@ -1,26 +1,17 @@
 <?php
 AAFW::import('jp.aainc.aafw.base.aafwGETActionBase');
 AAFW::import('jp.aainc.aafw.db.aafwDataBuilder');
-
-class create extends aafwGETActionBase {
-
+class checkout extends aafwGETActionBase {
 	public $Secure = true;
-
 	public function validate() {
 		return true;
 	}
 
 	public function doAction() {
 		$service = $this->createService('TimeSheetService');
-		
 		$user = $service->getUserBySession($this->SESSION);
+        $timesheet = $service->updateCheckOutTime($user);
 
-		if($service->getTimeSheet($user)) {
-            return 'redirect: /timesheet/test';
-        }
-
-        $timesheet = $service->createTimeSheet($user->id);
-        $timesheet->status = $service->getTimeSheet($user)->status;
 		$this->Data['timesheet'] = $timesheet;
 		return '/timesheet/index.php';
 

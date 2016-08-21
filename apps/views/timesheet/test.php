@@ -1,5 +1,5 @@
 <?php 
 	echo "<pre>";
-	echo $this->timesheet->day;
+	echo "Hoang The Toan";
 	die();
 ?>
