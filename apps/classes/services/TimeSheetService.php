@@ -14,6 +14,14 @@ class TimeSheetService extends aafwServiceBase {
 		return $timesheet;
 	}
 
+	 public function updateCheckOutTime($user){
+	 	$timesheets = $this->getModel('TimeSheets');
+		$timesheet = $this->getTimeSheet($user);
+		$timesheet->check_out_time = date('Y-m-d H:i:s');
+		$timesheets->save($timesheet);
+		return $timesheet;
+	}
+
 	public function getUserBySession($session) {
 		$users = $this->getModel ( 'Users' );
 		if (isset ( $session ['login_id'] )) {
@@ -22,4 +30,12 @@ class TimeSheetService extends aafwServiceBase {
 			) );
 		}
 	}
+
+	public function getTimeSheet($user) {
+	    $timesheets = $this->getModel('TimeSheets');
+        return $timesheets-> findOne ( array(
+           'user_id' => $user->id,
+            'day' => date('Y-m-d')
+        ));
+    }
 }
