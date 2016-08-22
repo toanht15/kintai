@@ -32,10 +32,35 @@
 	<header class="navbar navbar-inverse navbar-fixed-top">
 		<div class="navbar-inner">
 			<div class="wrap cf">
-				<a class="brand" href="/index">kintaiシステム</a>
+				<a class="brand" href="/index">ETMS</a>
 				<!-- /.wrap -->
 			</div>
 		</div>
 	</header>
+
+	<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+		<div class="container">
+			<a class="navbar-brand" href="/index">ETMS</a>
+			<ul class="nav navbar-nav pull-right">
+				<li class="active">
+					<a href="/index">Home</a>
+				</li>
+				<?php if(isset($_SESSION['login_id']) ): ?>
+				<li>
+					<a href="/report/index">All Report</a>
+				</li>
+				<li>
+					<a href="#">Link</a>
+				</li>
+				<li>
+					<a href="/user/logout">Logout</a>
+				</li>
+			<?php else: ?>
+				<li><a href="/user/login">Login</a></li>
+			<?php endif; ?>
+			</ul>
+		</div>
+	</nav>
+
 	<div class="wrap cf" id="wrap">
 		<div style="margin-top: 20px;">

@@ -3,12 +3,12 @@ AAFW::import ( 'jp.aainc.aafw.base.aafwException' );
 AAFW::import ( 'jp.aainc.aafw.factory.aafwEntityStoreFactory' );
 AAFW::import ( 'jp.aainc.aafw.factory.aafwServiceFactory' );
 AAFW::import ( 'jp.aainc.aafw.factory.aafwLibraryFactory' );
+
 /**
  * 多くのオブジェクトの元になるヤツ
  * 雑多なメソッドとかいっぱい持ってる(^^;)
  * 適切に分割したい(^^;)
  */
-
 class aafwObject {
     protected $_Strict         = false;
     protected $_Fields         = array ();

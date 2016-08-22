@@ -38,4 +38,9 @@ class TimeSheetService extends aafwServiceBase {
             'day' => date('Y-m-d')
         ));
     }
+
+    public function getAllTimeSheet(){
+    	$timesheets = $this->getModel('TimeSheets');
+    	return $timesheets->find(array('order'=>array('direction'=>'desc')));
+    }
 }

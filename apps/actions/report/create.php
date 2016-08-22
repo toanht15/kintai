@@ -53,7 +53,7 @@ class create extends aafwPOSTActionBase {
 		$report->content = $this->content;
 		$report = $service->createReport($report);
 
-		return 'redirect: /index';
+		return 'redirect: /report/show?id='.$report->id;
 	}
 }
 

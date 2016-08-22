@@ -10,7 +10,7 @@
 			<?php endif; ?>
 
 			<?php write_html($this->formTextArea('content', 'ActionForm', array("class" => "input-block-level",
-				"placeholder" => "...."))) ?>
+				"placeholder" => "to-do, progress, next-todo, issue...", "rows" => 20))) ?>
 			<br>
 			<button class="btn btn-large btn-primary" type="submit">Submit</button>
 		</form>

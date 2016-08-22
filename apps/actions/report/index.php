@@ -15,6 +15,15 @@ class index extends aafwGETActionBase {
 		$user = $user_service->getUserBySession($this->SESSION);
 
 		$service = $this->createService('ReportService');
-		$reposts = $service->getAllRepostOfUser($user);
+		//$reports = $service->getAllRepostOfUser($user);
+		$reports = $service->getAllRepost();
+		// foreach ($reports as $r) {
+		// 	$u = $service->getUserOfReport($r);
+		// 	echo $u->email;
+		// }
+		// die();
+
+		$this->Data['reports'] = $reports;
+		return 'report/index.php';
 	}
 }

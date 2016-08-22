@@ -1,7 +1,7 @@
 <?php write_html($this->Widgets->loadWidget('UserHeader')->render()) ?>
 
 	<div class="row">
-        <?php if($this->timesheet->status == 'working'): ?>
+        <?php if($this->checked_in): ?>
             <div class= "col-md-4">
                 <a href="" class="btn btn-primary btn-large disabled">Check-in</a>
             </div>

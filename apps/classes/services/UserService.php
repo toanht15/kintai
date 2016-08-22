@@ -118,6 +118,34 @@ class UserService extends aafwServiceBase {
 		$users->save($user);		
 		return $user;
 	}
+
+	public function getAllUser(){
+		$users = $this->getModel('Users');
+		return $users->find(array('order'=>array('direction'=>'desc')));
+	}
+
+	public function getTodayTimeSheet($user){
+		$timesheets = $this->getModel('TimeSheets');
+		return $timesheets->findOne(array(
+			'user_id'=>$user->id,
+			'day' => date('Y-m-d')
+			));
+	}
+
+	public function isCheckedOut($user){
+		$timesheets = $this->getModel('TimeSheets');
+		$result = $timesheets->findOne(array(
+			'user_id'=>$user->id,
+			'day' => date('Y-m-d')
+			));
+
+		if($result){
+			if($result->check_out_time)
+				return true;
+		}
+
+		return false;		
+	}
 	
 	/**
 	 *
