@@ -8,11 +8,15 @@ class checkout extends aafwGETActionBase {
 	}
 
 	public function doAction() {
-		$service = $this->createService('TimeSheetService');
-		$user = $service->getUserBySession($this->SESSION);
-        $timesheet = $service->updateCheckOutTime($user);
 
-		$this->Data['timesheet'] = $timesheet;
+		$user_service = $this->createService('UserService');
+		
+		$user = $user_service->getUserBySession($this->SESSION);
+		if($user_service->getTodayTimeSheet($user) && !$user_service->isCheckedOut($user)){
+		$service = $this->createService('TimeSheetService');
+        $timesheet = $service->updateCheckOutTime($user);
+    }
+
 		return 'redirect: /timesheet/index';
 
 	}
