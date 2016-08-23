@@ -10,24 +10,24 @@ class authenticate extends aafwPOSTActionBase {
 	protected $Form = array(
 		'action' => 'login',
 		'package' => 'user',
-	);
+		);
 	
 	protected $_ModelDefinitions = array(
 		'Users',
-	);
+		);
 	
 	protected $ValidatorDefinition = array(
 		'email' => array(
 			'required' => 1,
 			'type' => 'str',
 			'length' => 75,
-		),
+			),
 		'password' => array(
 			'required' => 1,
 			'type' => 'str',
 			'length' => 128,
-		),
-	);
+			),
+		);
 	
 	public function doThisFirst() {
 		if ($this->User) {
@@ -70,7 +70,11 @@ class authenticate extends aafwPOSTActionBase {
 			$this->SESSION['login_id'] = $this->Data['user']->id;
 			$service = $this->createService('UserService');
 			//$service->updateLastLogin($this->Data['user']);
-			$result = 'redirect: /timesheet/index';
+
+			if($this->Data['user']->isAdmin) 
+				$result = 'redirect: /admin/index';
+			else
+				$result = 'redirect: /timesheet/index';
 			$this->Data['saved'] = 1;
 		} else {
 			$result = 'redirect: /user/login/';

@@ -40,17 +40,17 @@
 
 	<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
 		<div class="container">
-			<a class="navbar-brand" href="/index">ETMS</a>
+			<a class="navbar-brand" href="/timesheet/index">ETMS</a>
 			<ul class="nav navbar-nav pull-right">
 				<li class="active">
-					<a href="/index">Home</a>
+					<a href="/timesheet/index">Home</a>
 				</li>
 				<?php if(isset($_SESSION['login_id']) ): ?>
 				<li>
-					<a href="/report/index">All Report</a>
+					<a href="/report/index">All reports</a>
 				</li>
 				<li>
-					<a href="#">Link</a>
+					 <a href="<?php echo "/user/index_reports?user_id=".$_SESSION['login_id']."" ?>" title="">My reports</a>
 				</li>
 				<li>
 					<a href="/user/logout">Logout</a>
@@ -64,3 +64,5 @@
 
 	<div class="wrap cf" id="wrap">
 		<div style="margin-top: 20px;">
+		
+        

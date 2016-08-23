@@ -15,25 +15,17 @@ class ReportService extends aafwServiceBase {
 		return $this->reports->save($report);		
 	}
 
-	public function getAllRepostOfUser($user){
-		$timesheets = $this->getModel('TimeSheets');
-		$timesheet = $timesheets->find(array('conditions'=>array('user_id'=>$user->id)));
-		$arr = array();
-		foreach ($timesheet as $t) {
-			$arr[] = $t->id;
-		}
-
-		$reports = $this->getModel('Reports');
-		$report = $reports->find(array('conditions'=>array('timesheet_id'=>$arr)));
-
-		return $report;
-	}
-
-	public function getAllRepost(){
+	public function getAllReport(){
 		$reports = $this->getModel('Reports');
 		$report = $reports->find(array('order'=>array('direction'=>'desc')));
 
 		return $report;
+	}
+
+	public function getAllReportWithInfo(){
+		$db = new aafwDataBuilder();
+		//$condition = array('day'=> date('Y-m-d'));
+		return $db->getAllReportInfo();
 	}
 
 	public function getUserOfReport($report){

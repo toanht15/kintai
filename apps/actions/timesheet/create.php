@@ -20,9 +20,11 @@ class create extends aafwGETActionBase {
         }
 
         $timesheet = $service->createTimeSheet($user->id);
-        $timesheet->status = $service->getTimeSheet($user)->status;
+
+        
 		$this->Data['timesheet'] = $timesheet;
-		return '/timesheet/index.php';
+		$this->Data['flash_message'] = 'Successfull';
+		return 'redirect: /timesheet/index.php';
 
 	}
 }

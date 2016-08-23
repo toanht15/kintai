@@ -2,7 +2,10 @@
 
 <h2>Daily-report of <strong style="color: green"><?php echo $this->user->email; ?></strong> at <strong style="color: green"><?php echo $this->date; ?></strong></h2>
 
-<p><?php echo $this->report->content; ?></p>
+<p><?php //echo $this->report->content; ?></p>
+
+<?php write_html($this->formTextArea('content', $this->report->content, array("class" => "input-block-level disabled",
+				"rows"=> 20))) ?>
 
 <form action='edit' method='post'>
 

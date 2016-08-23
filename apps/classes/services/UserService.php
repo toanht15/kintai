@@ -1,6 +1,8 @@
 <?php
 AAFW::import ( 'jp.aainc.lib.base.aafwServiceBase' );
 AAFW::import('jp.aainc.classes.entities.User');
+AAFW::import('jp.aainc.aafw.db.aafwDataBuilder');
+
 class UserService extends aafwServiceBase {
 	const STRETCH_COUNT = 5;
 	const FIXED_SALT = 'edc21dc921dcc1285d9b740b833af2c72bc0afc960b48ae5c9d00c14bda400bb';
@@ -41,8 +43,8 @@ class UserService extends aafwServiceBase {
 	public function getUserByEmail($email) {
 		$users = $this->getModel ( 'Users' );
 		return $users->findOne ( array (
-				'email' => $email 
-		) );
+			'email' => $email 
+			) );
 	}
 	
 	/**
@@ -77,9 +79,9 @@ class UserService extends aafwServiceBase {
 		$password = $this->getEmailHash ( $email, $password );
 		$users = $this->getModel ( 'Users' );
 		$user = $users->findOne ( array (
-				'email' => $email,
-				'password' => $password 
-		) );
+			'email' => $email,
+			'password' => $password 
+			) );
 		return $user;
 	}
 	
@@ -134,19 +136,54 @@ class UserService extends aafwServiceBase {
 
 	public function isCheckedOut($user){
 		$timesheets = $this->getModel('TimeSheets');
-		$result = $timesheets->findOne(array(
-			'user_id'=>$user->id,
-			'day' => date('Y-m-d')
-			));
-
+		$result = $this->getTodayTimeSheet($user);
 		if($result){
-			if($result->check_out_time)
+			if($result->check_out_time != "0000-00-00 00:00:00")
 				return true;
 		}
-
 		return false;		
 	}
+
+	public function hasReport($user){
+		$timesheets = $this->getModel('TimeSheets');
+		$result = $this->getTodayTimeSheet($user);
+
+		if($result){
+			$reports = $this->getModel('Reports');
+			$report = $reports->findOne(array('timesheet_id' => $result->id));
+			if($report) return true;
+		}
+
+		return false;
+	}
+
+	public function getAllUserCheckedIn(){
+		$db = new aafwDataBuilder();
+		$condition = array('day'=> date('Y-m-d'));
+		return $db->getAllUserInfo($condition);
+	}
 	
+	public function getAllUserNotCheckIn(){
+		$db = new aafwDataBuilder();
+		$condition = array('day'=> date('Y-m-d'));
+		return $db->getAllUserNotCheckIn($condition);
+	}
+
+	public function getAllRepostOfUser($user_id){
+		$timesheets = $this->getModel('TimeSheets');
+		$timesheet = $timesheets->find(array('conditions'=>array('user_id'=>$user_id)));
+		$arr = array();
+		foreach ($timesheet as $t) {
+			$arr[] = $t->id;
+		}
+
+		$reports = $this->getModel('Reports');
+		$report = $reports->find(array('conditions'=>array('timesheet_id'=>$arr)));
+
+		return $report;
+	}
+
+
 	/**
 	 *
 	 * @param
@@ -158,8 +195,8 @@ class UserService extends aafwServiceBase {
 	public function changeStatus($user_id, $newStatus) {
 		$users = $this->getModel('Users');
 		$user = $users->findOne ( array (
-				'id' => $user_id
-		) );
+			'id' => $user_id
+			) );
 		$user->status = $newStatus;
 		$users->save($user);
 		return $user;
@@ -198,8 +235,8 @@ class UserService extends aafwServiceBase {
 	public function changePassword($email, $newPassword) {
 		$users = $this->getModel('Users');
 		$user = $users->findOne ( array (
-				'email' => $email 
-		));
+			'email' => $email 
+			));
 		$newPassword = $this->getUsernameHash($user->username, $newPassword);
 		$user->password = $newPassword;
 		$users->save($user);
@@ -215,16 +252,16 @@ class UserService extends aafwServiceBase {
 	public function getUserById($id) {
 		$users = $this->getModel ( 'Users' );
 		return $users->findOne ( array (
-				'id' => $id 
-		) );
+			'id' => $id 
+			) );
 	}
 	
 	
 	public function changeAvata($user_id,$file_type){
 		$users = $this->getModel('Users');
 		$user = $users->findOne ( array (
-				'id' => $user_id
-		));
+			'id' => $user_id
+			));
 		$user->profile_picture = '/img/member_avata/'.$user_id.'.'.$file_type;
 		$users->save($user);
 		return $user;
@@ -238,17 +275,17 @@ class UserService extends aafwServiceBase {
 	public function getUserByName($username) {
 		$users = $this->getModel ( 'Users' );
 		return $users->findOne ( array (
-				'username' => $username 
-		));
+			'username' => $username 
+			));
 	}
 	
 /**
  * 
  */
-	public function totalCount($filter=null ) {
-		$users = $this->getModel ( 'Users' );
-		return $users->count($filter);
-	}
+public function totalCount($filter=null ) {
+	$users = $this->getModel ( 'Users' );
+	return $users->count($filter);
+}
 	/**
 	 * 
 	 * @param string $page
@@ -261,24 +298,24 @@ class UserService extends aafwServiceBase {
 		$filter= null;
 		if($page != null && $limit != null){
 			$filter = array(
-					'conditions' => $condition,
-					'pager' => array(
-							'page' => $page,
-							'count' => $limit,
+				'conditions' => $condition,
+				'pager' => array(
+					'page' => $page,
+					'count' => $limit,
 					),
-					'order' => array(
-							'name' => 'created_at',
-							'direction' => 'asc',
+				'order' => array(
+					'name' => 'created_at',
+					'direction' => 'asc',
 					),
-			);
+				);
 		}else{
 			$filter = array(
-					'conditions' => $condition,
-					'order' => array(
-							'name' => 'created_at',
-							'direction' => 'asc',
+				'conditions' => $condition,
+				'order' => array(
+					'name' => 'created_at',
+					'direction' => 'asc',
 					),
-			);
+				);
 		}
 		$all_users = $users->find($filter);
 		return $all_users;
@@ -298,8 +335,8 @@ class UserService extends aafwServiceBase {
 		$users = $this->getModel ( 'Users' );
 		if (isset ( $session ['login_id'] )) {
 			return $users->findOne ( array (
-					'id' => $session ['login_id'] 
-			) );
+				'id' => $session ['login_id'] 
+				) );
 		}
 	}
 }

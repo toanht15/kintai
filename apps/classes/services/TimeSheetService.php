@@ -18,6 +18,7 @@ class TimeSheetService extends aafwServiceBase {
 	 	$timesheets = $this->getModel('TimeSheets');
 		$timesheet = $this->getTimeSheet($user);
 		$timesheet->check_out_time = date('Y-m-d H:i:s');
+		$timesheet->status = 'Checked out';
 		$timesheets->save($timesheet);
 		return $timesheet;
 	}

@@ -13,7 +13,7 @@ class checkout extends aafwGETActionBase {
         $timesheet = $service->updateCheckOutTime($user);
 
 		$this->Data['timesheet'] = $timesheet;
-		return '/timesheet/index.php';
+		return 'redirect: /timesheet/index';
 
 	}
 }
