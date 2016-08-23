@@ -11,20 +11,18 @@ class create extends aafwGETActionBase {
 	}
 
 	public function doAction() {
-		$service = $this->createService('TimeSheetService');
 		
-		$user = $service->getUserBySession($this->SESSION);
+		$user_service = $this->createService('UserService');
+		$user = $user_service->getUserBySession($this->SESSION);
 
-		if($service->getTimeSheet($user)) {
-            return 'redirect: /timesheet/test';
-        }
+		if(!$user_service->getTodayTimeSheet($user)){
+			$service = $this->createService('TimeSheetService');		
+			$timesheet = $service->createTimeSheet($user->id);
+		}
 
-        $timesheet = $service->createTimeSheet($user->id);
-
-        
 		$this->Data['timesheet'] = $timesheet;
 		$this->Data['flash_message'] = 'Successfull';
-		return 'redirect: /timesheet/index.php';
+		return 'redirect: /timesheet/index';
 
 	}
 }
