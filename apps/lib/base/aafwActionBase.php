@@ -7,8 +7,8 @@
 require_once 'aafwValidatorBase.php';
 require_once 'aafwValidator.php';
 require_once 'aafwApplicationConfig.php';
-
 abstract class aafwActionBase extends aafwValidatorBase {
+
   protected $POST    = null;
   protected $GET     = null;
   protected $SESSION = null;

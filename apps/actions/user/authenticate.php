@@ -10,24 +10,24 @@ class authenticate extends aafwPOSTActionBase {
 	protected $Form = array(
 		'action' => 'login',
 		'package' => 'user',
-	);
+		);
 	
 	protected $_ModelDefinitions = array(
 		'Users',
-	);
+		);
 	
 	protected $ValidatorDefinition = array(
 		'email' => array(
 			'required' => 1,
 			'type' => 'str',
 			'length' => 75,
-		),
+			),
 		'password' => array(
 			'required' => 1,
 			'type' => 'str',
 			'length' => 128,
-		),
-	);
+			),
+		);
 	
 	public function doThisFirst() {
 		if ($this->User) {
@@ -47,10 +47,8 @@ class authenticate extends aafwPOSTActionBase {
 		} else {
 			// ユーザーの存在チェック
 			$service = $this->createService('UserService');
-
 			//メールの存在チェック
 			$user = $service->getUserByEmail($this->email);
-
 			if (!$user || ($user->status == 1)){
 				$this->Validator->setError('login', 'LOGIN_ERROR');
 			}
@@ -72,7 +70,13 @@ class authenticate extends aafwPOSTActionBase {
 			$this->SESSION['login_id'] = $this->Data['user']->id;
 			$service = $this->createService('UserService');
 			//$service->updateLastLogin($this->Data['user']);
-			$result = 'redirect: /index';
+
+			if($this->Data['user']->isAdmin){
+				$this->SESSION['isAdmin'] = $this->Data['user']->isAdmin; 
+				$result = 'redirect: /admin/index';
+			}
+			else
+				$result = 'redirect: /timesheet/index?login=1';
 			$this->Data['saved'] = 1;
 		} else {
 			$result = 'redirect: /user/login/';

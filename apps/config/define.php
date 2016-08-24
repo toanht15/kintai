@@ -10,7 +10,7 @@ ini_set( 'include_path',  ini_get('include_path'). PATH_SEPARATOR . AAFW_DIR );
 ini_set( 'include_path',  ini_get('include_path'). PATH_SEPARATOR . AAFW_DIR . '/lib' );
 ini_set( 'include_path',  ini_get('include_path'). PATH_SEPARATOR . AAFW_DIR . '/vendor' );
 ini_set( 'display_errors', DEBUG );
-date_default_timezone_set ( 'Asia/Tokyo' );
+date_default_timezone_set ( 'Asia/Hanoi' );
 require_once 'AAFW.php';
 require_once 'aafwFunctions.php';
 require_once 'aafwAutoLoader.php';

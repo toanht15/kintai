@@ -10,4 +10,3 @@ class aafwServiceFactory {
     return $obj;
   }
 }
-
