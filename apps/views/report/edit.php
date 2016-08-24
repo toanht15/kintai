@@ -2,7 +2,7 @@
 
 <form class="form-daily-report" action="/report/update" method="post">
 			<h3 class="form-report-heading">Edit daily-report</h3>
-			<?php write_html($this->formHidden('report_id', $this->repost->id)) ?>
+			<?php write_html($this->formHidden('report_id', $this->report->id)) ?>
 			<?php if ($this->ActionError): ?>
 				<div class="alert alert-error">
 					Input error.

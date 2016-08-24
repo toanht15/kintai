@@ -10,6 +10,13 @@ class create extends aafwGETActionBase {
 		return true;
 	}
 
+	public function doThisFirst(){
+		if( !isset($_SESSION['login_id']) )
+		{					
+			return 'redirect: /user/login';
+		}
+	}
+
 	public function doAction() {
 		
 		$user_service = $this->createService('UserService');
@@ -18,11 +25,10 @@ class create extends aafwGETActionBase {
 		if(!$user_service->getTodayTimeSheet($user)){
 			$service = $this->createService('TimeSheetService');		
 			$timesheet = $service->createTimeSheet($user->id);
+			return 'redirect: /timesheet/index?check_in=1';
 		}
 
-		$this->Data['timesheet'] = $timesheet;
-		$this->Data['flash_message'] = 'Successfull';
-		return 'redirect: /timesheet/index';
+		return 'redirect: /timesheet/index?checked_in=1';
 
 	}
 }

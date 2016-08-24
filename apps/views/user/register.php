@@ -1,4 +1,4 @@
-<?php write_html($this->Widgets->loadWidget('UserHeader')->render(array('User' => $this->user))) ?>
+<?php write_html($this->Widgets->loadWidget('AdminHeader')->render()) ?>
 
 <div class="row">
 

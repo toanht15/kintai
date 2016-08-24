@@ -71,10 +71,12 @@ class authenticate extends aafwPOSTActionBase {
 			$service = $this->createService('UserService');
 			//$service->updateLastLogin($this->Data['user']);
 
-			if($this->Data['user']->isAdmin) 
+			if($this->Data['user']->isAdmin){
+				$this->SESSION['isAdmin'] = $this->Data['user']->isAdmin; 
 				$result = 'redirect: /admin/index';
+			}
 			else
-				$result = 'redirect: /timesheet/index';
+				$result = 'redirect: /timesheet/index?login=1';
 			$this->Data['saved'] = 1;
 		} else {
 			$result = 'redirect: /user/login/';

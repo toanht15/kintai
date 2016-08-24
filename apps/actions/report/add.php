@@ -10,6 +10,13 @@ class add extends aafwGETActionBase {
 		return true;
 	}
 
+	public function doThisFirst(){
+		if( !isset($_SESSION['login_id']) )
+		{					
+			return 'redirect: /user/login';
+		}
+	}
+	
 	public function doAction() {
 
 		return '/report/add.php';

@@ -10,11 +10,13 @@ class checkout extends aafwGETActionBase {
 	public function doAction() {
 
 		$user_service = $this->createService('UserService');
-		
 		$user = $user_service->getUserBySession($this->SESSION);
+
 		if($user_service->getTodayTimeSheet($user) && !$user_service->isCheckedOut($user) && $user_service->hasReport($user)){
 		$service = $this->createService('TimeSheetService');
         $timesheet = $service->updateCheckOutTime($user);
+
+        return 'redirect: /timesheet/index?checked_out=1';
     }
 
 		return 'redirect: /timesheet/index';

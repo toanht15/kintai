@@ -27,6 +27,10 @@ class create extends aafwPOSTActionBase {
 		);
 	
 	public function doThisFirst() {
+		if( !isset($_SESSION['login_id']) )
+		{					
+			return 'redirect: /user/login';
+		}
 		// if ($this->User) {
 		// 	return 'redirect: /user/register';
 		// }
@@ -48,12 +52,16 @@ class create extends aafwPOSTActionBase {
 		$user = $user_service->getUserBySession($this->SESSION);
 		$timesheet = $timesheet_service->getTimeSheet($user);
 
+		if(!$user_service->hasReport($user)){
 		$report = new Report();
 		$report->timesheet_id = $timesheet->id;
 		$report->content = $this->content;
 		$report = $service->createReport($report);
 
 		return 'redirect: /report/show?id='.$report->id;
+	}
+
+		return 'redirect: /timesheet/index?has_report=1';
 	}
 }
 

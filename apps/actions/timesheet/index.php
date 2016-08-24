@@ -21,14 +21,19 @@ class index extends aafwGETActionBase {
 		$timesheet = $user_service->getTodayTimeSheet($current_user);
 
 		if($timesheet) $checked_in = true; else $checked_in = false;
-
 		if($user_service->isCheckedOut($current_user)) $checked_out =true; else $checked_out = false;
-
 		if($user_service->hasReport($current_user)) $hasReport = true; else $hasReport = false;
+
+		if($this->login) $this->Data['flash_message'] = "Login successfull.";
+		if($this->check_in) $this->Data['flash_message'] = "Check in successfull.	Enjoy your working day.";
+		if($this->checked_in) $this->Data['flash_message'] = "You have been checked in.";
+		if($this->checked_out) $this->Data['flash_message'] = "Check out successfull.";
+		if($this->has_report) $this->Data['flash_message'] = "You have report today.";
 
 		$this->Data['hasReport'] = $hasReport;
 		$this->Data['checked_in'] = $checked_in;
 		$this->Data['checked_out'] = $checked_out;
+
 		return 'timesheet/index.php';
 	}
 }

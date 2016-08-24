@@ -22,10 +22,16 @@ class ReportService extends aafwServiceBase {
 		return $report;
 	}
 
-	public function getAllReportWithInfo(){
+	public function getAllReportWithInfo($params){
 		$db = new aafwDataBuilder();
 		//$condition = array('day'=> date('Y-m-d'));
-		return $db->getAllReportInfo();
+		return $db->getAllReportInfo($params);
+	}
+
+	public function countAllReport(){
+		$db = new aafwDataBuilder();
+		$result = $db->countAllReport();
+		return reset($result)['COUNT(R.id)'];
 	}
 
 	public function getUserOfReport($report){

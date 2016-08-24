@@ -1,32 +1,32 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="">
-<meta name="author" content="">
-<?php if (extension_loaded ('newrelic')) {
-	echo newrelic_get_browser_timing_header();
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<?php if (extension_loaded ('newrelic')) {
+		echo newrelic_get_browser_timing_header();
 	} ?>
-<!--	<link rel="shortcut icon" href="/ico/favicon.ico" />-->
-<link rel="stylesheet"
+	<!--	<link rel="shortcut icon" href="/ico/favicon.ico" />-->
+	<link rel="stylesheet"
 	href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
-<link href="/lib/bootstrap/css/bootstrap-min-ex.css" rel="stylesheet"
+	<link href="/lib/bootstrap/css/bootstrap-min-ex.css" rel="stylesheet"
 	media="screen">
-<link href="/lib/bootstrap/css/bootstrap-337.min.css" rel="stylesheet"
+	<link href="/lib/bootstrap/css/bootstrap-337.min.css" rel="stylesheet"
 	media="screen">
-<link rel="stylesheet" type="text/css"
+	<link rel="stylesheet" type="text/css"
 	href="http://yui.yahooapis.com/3.13.0/build/cssreset/cssreset-min.css">
-<link rel="stylesheet" href="/css/src/style.css">
-<link rel="shortcut icon"
+	<link rel="stylesheet" href="/css/src/style.css">
+	<link rel="shortcut icon"
 	href="https://gizi.aa-dev.com/sites/default/files/favicon.ico"
 	type="image/x-icon" />
-<script type="text/javascript" src="/js/src/html5shiv-printshiv.js"></script>
-<script
+	<script type="text/javascript" src="/js/src/html5shiv-printshiv.js"></script>
+	<script
 	src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-<script src="/js/src/unit.js"></script>
-<link href="/css/dest/all-min.css" rel="stylesheet">
-<title>kintaiシステム</title>
+	<script src="/js/src/unit.js"></script>
+	<link href="/css/dest/all-min.css" rel="stylesheet">
+	<title>kintaiシステム</title>
 </head>
 <body>
 	<header class="navbar navbar-inverse navbar-fixed-top">
@@ -46,23 +46,28 @@
 					<a href="/timesheet/index">Home</a>
 				</li>
 				<?php if(isset($_SESSION['login_id']) ): ?>
-				<li>
-					<a href="/report/index">All reports</a>
-				</li>
-				<li>
-					 <a href="<?php echo "/user/index_reports?user_id=".$_SESSION['login_id']."" ?>" title="">My reports</a>
-				</li>
+					<li>
+						<a href="/report/index">All reports</a>
+					</li>
+					<?php if(isset($_SESSION['isAdmin']) ): ?>
+						<li>
+							<a href="<?php echo "/user/register" ?>" title="">Create user</a>
+						</li>
+					<?php else: ?>
+					<li>
+						<a href="<?php echo "/user/index_reports?user_id=".$_SESSION['login_id']."" ?>" title="">My reports</a>
+					</li>
+				<?php endif; ?>
 				<li>
 					<a href="/user/logout">Logout</a>
 				</li>
 			<?php else: ?>
 				<li><a href="/user/login">Login</a></li>
 			<?php endif; ?>
-			</ul>
-		</div>
-	</nav>
+		</ul>
+	</div>
+</nav>
 
-	<div class="wrap cf" id="wrap">
-		<div style="margin-top: 20px;">
+<div class="wrap cf" id="wrap">
+	<div style="margin-top: 20px;">
 		
-        

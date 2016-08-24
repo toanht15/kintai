@@ -6,14 +6,8 @@
 <div id="footer">
 	<div>
 		<p class="muted">
-			<small>Copyright (c) 2012-2013 Allied Architects, Inc. All Rights
-				Reserved.</small> <small>&nbsp;|&nbsp;<a target="_blank"
-				href="http://www.aainc.co.jp/">運営会社</a>
-			</small> <small>&nbsp;|&nbsp;<a target="_blank"
-				href="http://www.aainc.co.jp/policy/">プライバシーポリシー</a>
-			</small> <small>&nbsp;|&nbsp;<a target="_blank"
-				href="http://www.aainc.co.jp/service/social-in/rule/">利用規約</a>
-			</small> <small>&nbsp;|&nbsp;</small>
+			<small>Copyright (c) 2016 Allied Tech Base, Inc. All Rights
+				Reserved.</small> 
 		</p>
 	</div>
 </div>

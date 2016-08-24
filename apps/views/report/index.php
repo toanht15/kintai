@@ -18,4 +18,10 @@
 	</tbody>
 </table>
 
+<?php write_html(aafwWidgets::getInstance()->loadWidget('KintaiPager')->render(array(
+               'TotalCount' => $this->total_file_count,
+               'CurrentPage' => $this->params['p'],
+               'Count' => $this->page_limited,
+           ))) ?>
+
 <?php write_html($this->Widgets->loadWidget('UserFooter')->render()) ?>

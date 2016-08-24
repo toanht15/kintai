@@ -18,7 +18,10 @@ class edit extends aafwPOSTActionBase {
 	);
 	
 	public function doThisFirst() {
-		return true;
+		if( !isset($_SESSION['login_id']) )
+		{					
+			return 'redirect: /user/login';
+		}
 	}
 	
 	public function validate() {
