@@ -6,7 +6,7 @@ AAFW::import('jp.aainc.aafw.db.aafwDataBuilder');
 class update_password extends aafwPOSTActionBase {
 	public $Secure = true;
 	
-	protected $ContainerName = 'update_password';
+	protected $ContainerName = 'change_password';
 	protected $ErrorPage = 'redirect: /user/change_password';
 	protected $Form = array(
 		'action' => 'user',
@@ -30,8 +30,17 @@ class update_password extends aafwPOSTActionBase {
 	
 	public function doAction() {
 	
-	echo $this->password;
-	die();
+	if ($this->password != $this->retype_password) {
+		$this->Data['flash_message'] = "Password and retype-password not match.";
+		return 'user/changePassword.php';
+	}
+	
+	$service = $this->createService('UserService');
+	$user = $service->getUserBySession($this->SESSION);
+	$service->changePassword($user, $this->password);
+	$this->Data['flash_message'] = "Change password successfull.";
+		return 'user/changePassword.php';
+
 
 	}
 }

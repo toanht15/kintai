@@ -232,12 +232,10 @@ class UserService extends aafwServiceBase {
 	 * @param email, new password
 	 * @return User
 	 */
-	public function changePassword($email, $newPassword) {
+	public function changePassword($user, $newPassword) {
 		$users = $this->getModel('Users');
-		$user = $users->findOne ( array (
-			'email' => $email 
-			));
-		$newPassword = $this->getUsernameHash($user->username, $newPassword);
+		$user = $this->getUserByEmail($user->email);
+		$newPassword = $this->getEmailHash($user->email, $newPassword);
 		$user->password = $newPassword;
 		$users->save($user);
 		return $user;

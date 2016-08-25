@@ -1,4 +1,8 @@
-<?php write_html($this->Widgets->loadWidget('UserHeader')->render(array('User' => $this->user))) ?>
+<?php write_html($this->Widgets->loadWidget('UserHeader')->render()) ?>
+
+<?php if($this->flash_message): ?>
+<div class="alert alert-danger"><?php echo $this->flash_message; ?></div>
+<?php endif; ?>
 
 <div class='row'>
 	<form action="/user/update_password" class='form-signin' method='post'>
@@ -17,7 +21,7 @@
 			<p class='text-error'><?php assign($this->ActionError->getMessage('password')) ?> </p>
 		<?php endif; ?>
 
-		<?php write_html($this->formPassword('retype-password', 'ActionForm', array("class" => "input-block-level", "placeholder" => "Retype new password"))) ?>
+		<?php write_html($this->formPassword('retype_password', 'ActionForm', array("class" => "input-block-level", "placeholder" => "Retype new password"))) ?>
 
 		<div>
 			<button class='btn btn-large btn-primary' type='submit'>Update</button>
