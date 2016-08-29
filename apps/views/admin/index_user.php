@@ -18,25 +18,31 @@
         <tbody>
             <?php foreach ($this->users as $user): ?>
                 <tr>
-                    <td><?php echo $user->id; ?></td>
-                    <td><?php echo $user->email; ?></td>
-                    <td><?php echo $user->date_created; ?></td>
-                    <td><?php if($user->isAdmin) echo "Admin"; else echo "Normal"; ?></td>                 
+                    <td><?php echo $user['id']; ?></td>
+                    <td><?php echo $user['email']; ?></td>
+                    <td><?php echo $user['date_created']; ?></td>
+                    <td><?php if($user['isAdmin']) echo "Admin"; else echo "Normal"; ?></td>                 
                     <td>
-                        <?php if(!$user->isAdmin): ?>
+                        <?php if(!$user['isAdmin']): ?>
                             <div class="row">
-                                <div class="col-md-3">
-                                    <a href="<?php echo "/user/index_reports?user_id=".$user->id."" ?>" class="btn btn-xs btn-primary">Daily-reports</a>
+                                <div class="col-md-2">
+                                    <a href="<?php echo "/user/index_reports?user_id=".$user['id']."" ?>" class="btn btn-xs btn-primary">Daily-reports</a>
                                 </div>                           
-                                <div class="col-md-3">
+                                <div class="col-md-2">
                                     <form action='set_admin' method='post'>
-                                        <?php write_html($this->formHidden('user_id', $user->id)) ?>
+                                        <?php write_html($this->formHidden('user_id', $user['id'])) ?>
                                         <button class="btn btn-xs btn-info" type="submit">Set admin</button>
                                     </form>
                                 </div>
                                 <div class="col-md-3">
+                                    <form action='reset_password' method='post'>
+                                        <?php write_html($this->formHidden('user_id', $user['id'])) ?>
+                                        <button class="btn btn-xs btn-warning" type="submit">Reset password</button>
+                                    </form>
+                                </div>
+                                <div class="col-md-3">
                                     <form action='delete_user' method='post'>
-                                        <?php write_html($this->formHidden('user_id', $user->id)) ?>
+                                        <?php write_html($this->formHidden('user_id', $user['id'])) ?>
                                         <button class="btn btn-xs btn-danger" type="submit">Delete</button>
                                     </form> 
                                 </div>
@@ -48,4 +54,11 @@
         </tbody>
     </table>
 </div>
-<?php write_html ( $this->Widgets->loadWidget( 'UserFooter' )->render () )?>
+
+<?php write_html(aafwWidgets::getInstance()->loadWidget('KintaiPager')->render(array(
+ 'TotalCount' => $this->total_file_count,
+ 'CurrentPage' => $this->params['p'],
+ 'Count' => $this->page_limited,
+ ))) ?>
+ 
+ <?php write_html ( $this->Widgets->loadWidget( 'UserFooter' )->render () )?>

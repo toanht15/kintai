@@ -5,7 +5,7 @@ AAFW::import('jp.aainc.aafw.db.aafwDataBuilder');
 class index extends aafwGETActionBase {
 
 	public $Secure = true;
-	const PAGE_LIMIT = 10;
+	const PAGE_LIMIT = 15;
 
 	public function validate() {
 		return true;

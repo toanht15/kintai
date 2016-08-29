@@ -156,9 +156,20 @@ class UserService extends aafwServiceBase {
 		}
 	}
 
+	public function resetPassword($id){
+		$user = $this->getUserById($id);
+		$newPassword = '123456';
+		return $this->changePassword($user, $newPassword);
+	}
+
 	public function totalCount($filter=null ) {
 		$users = $this->getModel ( 'Users' );
 		return $users->count($filter);
+	}
+
+	public function getUsersByPage($param){
+		$db = new aafwDataBuilder();
+		return $db->getUsersByPage($param);
 	}
 
 	public function getUsersListByPage($page=null, $limit=null, $condition=null){

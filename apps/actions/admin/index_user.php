@@ -2,6 +2,7 @@
 AAFW::import('jp.aainc.aafw.base.aafwGETActionBase');
 AAFW::import('jp.aainc.aafw.db.aafwDataBuilder');
 class index_user extends aafwGETActionBase {
+	const PAGE_LIMIT = 15;
 
 	public function validate() {
 		return true;
@@ -21,12 +22,45 @@ class index_user extends aafwGETActionBase {
 
 	public function doAction() {
 		$service = $this->createService('UserService');
-		$users = $service->getAllUser();
-		
+		//$users = $service->getAllUser();
+
+		$total_count = $service->totalCount();
+		$this->Data['page_limited'] = self::PAGE_LIMIT;
+		$this->Data['total_file_count'] = $total_count;
+		$total_page = floor($total_count / self::PAGE_LIMIT) + ($total_count % self::PAGE_LIMIT > 0);
+
+		$this->p = $this->getCorrectPaging($this->p,$total_page);
+
+		$offset = ($this->p -1) * $this->Data['page_limited'];
+		$params = array(
+			'limit' =>$this->Data['page_limited'],
+			'offset' => $offset
+			);
+		$users = $service->getUsersByPage($params);
+
 		$this->Data['users'] = $users;
 		if($this->del) $this->Data['flash_message'] = 'User has been deleted successfull.';
 		if($this->update) $this->Data['flash_message'] = 'Update successfull.';
+		if($this->reset) $this->Data['flash_message'] = 'Password has been reseted successfull. New password is 123456';
 		
 		return '/admin/index_user.php';
 	}
+
+	public  function getCorrectPaging($paging, $total_page) {
+		$aafwObject = new aafwObject();
+
+		if (!$aafwObject->isNumeric($paging)
+			|| $aafwObject->isEmpty($paging)
+			|| $paging <= 0
+			) {
+
+			return 1;
+	}
+
+	if ($paging > $total_page) {
+		return $total_page;
+	}
+
+	return $paging;
+}
 }

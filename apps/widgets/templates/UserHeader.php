@@ -59,6 +59,9 @@
 					<li>
 						<a href="/report/index">All reports</a>
 					</li>
+					<li>
+						<a href="/user/change_password">Change password</a>
+					</li>
 					<?php if(isset($_SESSION['isAdmin']) ): ?>
 						<li>
 							<a href="<?php echo "/user/register" ?>" title="">Create user</a>
