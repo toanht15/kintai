@@ -1,4 +1,4 @@
-<?php write_html($this->Widgets->loadWidget('AdminHeader')->render()) ?>
+<?php write_html($this->Widgets->loadWidget('UserHeader')->render()) ?>
 
 <div class="row">
 
@@ -24,8 +24,7 @@
 			<?php if ($this->ActionError && !$this->ActionError->isValid('password')): ?>
 				<p class="text-error"><?php assign($this->ActionError->getMessage('password')) ?></p>
 			<?php endif; ?>
-
-
+			
 			<button class="btn btn-large btn-primary" type="submit">Submit</button>
 		</form>
 </div>

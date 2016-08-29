@@ -40,11 +40,21 @@
 
 	<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
 		<div class="container">
-			<a class="navbar-brand" href="/timesheet/index">ETMS</a>
+			<?php if(isset($_SESSION['isAdmin']) ): ?>
+				<a class="navbar-brand" href="/admin/index">ETMS</a>
+			<?php else: ?>
+				<a class="navbar-brand" href="/timesheet/index">ETMS</a>
+			<?php endif; ?>
 			<ul class="nav navbar-nav pull-right">
-				<li class="active">
-					<a href="/timesheet/index">Home</a>
-				</li>
+				<?php if(isset($_SESSION['isAdmin']) ): ?>
+					<li class="active">
+						<a href="/admin/index">Home</a>
+					</li>
+				<?php else: ?>
+					<li class="active">
+						<a href="/timesheet/index">Home</a>
+					</li>
+				<?php endif; ?>
 				<?php if(isset($_SESSION['login_id']) ): ?>
 					<li>
 						<a href="/report/index">All reports</a>
@@ -53,21 +63,23 @@
 						<li>
 							<a href="<?php echo "/user/register" ?>" title="">Create user</a>
 						</li>
+						<li>
+							<a href="<?php echo "/admin/index_user" ?>" title="">Manager user</a>
+						</li>
 					<?php else: ?>
+						<li>
+							<a href="<?php echo "/user/index_reports?user_id=".$_SESSION['login_id']."" ?>" title="">My reports</a>
+						</li>
+					<?php endif; ?>
 					<li>
-						<a href="<?php echo "/user/index_reports?user_id=".$_SESSION['login_id']."" ?>" title="">My reports</a>
+						<a href="/user/logout">Logout</a>
 					</li>
+				<?php else: ?>
+					<li><a href="/user/login">Login</a></li>
 				<?php endif; ?>
-				<li>
-					<a href="/user/logout">Logout</a>
-				</li>
-			<?php else: ?>
-				<li><a href="/user/login">Login</a></li>
-			<?php endif; ?>
-		</ul>
-	</div>
-</nav>
+			</ul>
+		</div>
+	</nav>
 
-<div class="wrap cf" id="wrap">
-	<div style="margin-top: 20px;">
-		
+	<div class="wrap cf" id="wrap">
+		<div style="margin-top: 20px;">
