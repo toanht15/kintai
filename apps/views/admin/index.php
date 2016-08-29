@@ -6,7 +6,6 @@
             <tr>
                 <th>ID</th>
                 <th>Email</th>
-                <th>Date Created</th>
                 <th>Status</th>
                 <th>Check in time</th>          
                 <th>Check out time</th>          
@@ -17,8 +16,13 @@
                 <tr>
                     <td><?php echo $user['id']; ?></td>
                     <td><?php echo $user['email']; ?></td>
-                    <td><?php echo $user['date_created']; ?></td>
-                    <td><?php echo $user['status']; ?></td>
+                    <td>
+                        <?php if($user['status'] == 'Working'): ?>
+                            <span class="lablel label-info"><?php echo $user['status']; ?></span>
+                        <?php else: ?>
+                            <span class="lablel label-warning"><?php echo $user['status']; ?></span>
+                        <?php endif; ?>
+                    </td>
                     <td><?php echo $user['check_in_time']; ?></td>
                     <td><?php echo $user['check_out_time']; ?></td>
                 </tr>
@@ -28,14 +32,12 @@
                 <tr>
                     <td><?php echo $user['id']; ?></td>
                     <td><?php echo $user['email']; ?></td>
-                    <td><?php echo $user['date_created']; ?></td>
-                    <td>Not check in</td>
+                    <td><span class="label label-danger">Not check in</span></td>
                     <td></td>
                     <td></td>
                 </tr>
             <?php endforeach; ?>
         </tbody>
     </table>
-</div>
 </div>
 <?php write_html ( $this->Widgets->loadWidget( 'UserFooter' )->render () )?>

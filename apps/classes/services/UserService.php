@@ -7,24 +7,10 @@ class UserService extends aafwServiceBase {
 	const STRETCH_COUNT = 5;
 	const FIXED_SALT = 'edc21dc921dcc1285d9b740b833af2c72bc0afc960b48ae5c9d00c14bda400bb';
 	
-	/**
-	 *
-	 * @param
-	 *        	$email
-	 * @return string
-	 */
 	private function getSalt($email) {
 		return $email . pack ( 'H*', self::FIXED_SALT );
 	}
 	
-	/**
-	 *
-	 * @param
-	 *        	$email
-	 * @param
-	 *        	$password
-	 * @return string
-	 */
 	public function getEmailHash($email, $password) {
 		$salt = $this->getSalt ( $email );
 		$hash = '';
@@ -34,12 +20,6 @@ class UserService extends aafwServiceBase {
 		return $hash;
 	}
 	
-	/**
-	 *
-	 * @param
-	 *        	$email
-	 * @return mixed
-	 */
 	public function getUserByEmail($email) {
 		$users = $this->getModel ( 'Users' );
 		return $users->findOne ( array (
@@ -47,33 +27,12 @@ class UserService extends aafwServiceBase {
 			) );
 	}
 	
-	/**
-	 *
-	 * @param User $user        	
-	 */
 	public function updateLastLogin($user) {
 		$users = $this->getModel ( 'Users' );
 		$user->last_login = date ( 'Y/m/d H:i:s' );
 		$users->save ( $user );
 	}
 	
-	/**
-	 *
-	 * @param
-	 *        	$username
-	 * @param
-	 *        	$password
-	 * @return mixed
-	 */
-	// public function authenticate($username, $password) {
-	// 	$password = $this->getUsernameHash ( $username, $password );
-	// 	$users = $this->getModel ( 'Users' );
-	// 	$user = $users->findOne ( array (
-	// 			'username' => $username,
-	// 			'password' => $password 
-	// 	) );
-	// 	return $user;
-	// }
 
 	public function authenticate($email, $password) {
 		$password = $this->getEmailHash ( $email, $password );
@@ -85,29 +44,6 @@ class UserService extends aafwServiceBase {
 		return $user;
 	}
 	
-	/**
-	 *
-	 * @param
-	 *        	$username
-	 * @param
-	 *        	$email
-	 * @param
-	 *        	$password
-	 * @return User
-	 */
-	// public function createUser($username, $email, $password) {
-	// 	$users = $this->getModel('Users');
-	// 	$user = new User();
-	// 	$user->username = $username;
-	// 	$user->email = $email;
-	// 	$user->profile_picture = '/img/member_avata/default.gif';
-	// 	$user->status = 0;
-	// 	$user->password = $this->getUsernameHash($username, $password);
-	// 	$user->last_login = date('Y/m/d H:i:s');
-	// 	$users->save($user);		
-	// 	return $user;
-	// }
-
 	public function createUser($email, $password) {
 		$users = $this->getModel('Users');
 		$user = new User();
@@ -182,56 +118,7 @@ class UserService extends aafwServiceBase {
 
 		return $report;
 	}
-
-
-	/**
-	 *
-	 * @param
-	 *        	$user_id
-	 * @param
-	 *        	$newStatus
-	 * @return User
-	 */
-	public function changeStatus($user_id, $newStatus) {
-		$users = $this->getModel('Users');
-		$user = $users->findOne ( array (
-			'id' => $user_id
-			) );
-		$user->status = $newStatus;
-		$users->save($user);
-		return $user;
-	}
 	
-	
-	/**
-	 * 
-	 * @param unknown $tmp
-	 * @return unknown
-	 */
-	public function updateUser($tmp) {
-		$users = $this->getModel('Users');
-		$user = $this->getUserByName($tmp->username);
-		
-		$user->email = $tmp->email;
-		$user->birthdate = $tmp->birthdate;
-		$user->birthplace = $tmp->birthplace;
-		$user->costellation = $tmp->costellation;
-		$user->blood_type = $tmp->blood_type;
-		$user->description = $tmp->description;
-		$user->last_login = date('Y/m/d H:i:s');
-		try {
-			$users->save($user);
-		} catch (Exception $e) {
-			var_dump($e); exit(1);
-		}	
-		return $user;
-	}
-	
-	/**
-	 *
-	 * @param email, new password
-	 * @return User
-	 */
 	public function changePassword($user, $newPassword) {
 		$users = $this->getModel('Users');
 		$user = $this->getUserByEmail($user->email);
@@ -241,12 +128,6 @@ class UserService extends aafwServiceBase {
 		return $user;
 	}
 	
-	/**
-	 *
-	 * @param
-	 *        	$id
-	 * @return mixed
-	 */
 	public function getUserById($id) {
 		$users = $this->getModel ( 'Users' );
 		return $users->findOne ( array (
@@ -254,43 +135,32 @@ class UserService extends aafwServiceBase {
 			) );
 	}
 	
-	
-	public function changeAvata($user_id,$file_type){
-		$users = $this->getModel('Users');
-		$user = $users->findOne ( array (
-			'id' => $user_id
-			));
-		$user->profile_picture = '/img/member_avata/'.$user_id.'.'.$file_type;
-		$users->save($user);
-		return $user;
-	}
-	/**
-	 *
-	 * @param
-	 *        	$username
-	 * @return mixed
-	 */
-	public function getUserByName($username) {
+	public function deleteUser($id){
 		$users = $this->getModel ( 'Users' );
-		return $users->findOne ( array (
-			'username' => $username 
-			));
+		$user = $this->getUserById($id);
+		try {
+			$users->deletePhysical($user);
+		} catch (Exception $e) {
+			var_dump($e); exit(1);
+		}
 	}
-	
-/**
- * 
- */
-public function totalCount($filter=null ) {
-	$users = $this->getModel ( 'Users' );
-	return $users->count($filter);
-}
-	/**
-	 * 
-	 * @param string $page
-	 * @param string $limit
-	 * @param string $condition
-	 * @return unknown
-	 */
+
+	public function setAdmin($id){
+		$users = $this->getModel ( 'Users' );
+		$user = $this->getUserById($id);
+		$user->isAdmin = true;
+		try {
+			$users->save($user);
+		} catch (Exception $e) {
+			var_dump($e); exit(1);
+		}
+	}
+
+	public function totalCount($filter=null ) {
+		$users = $this->getModel ( 'Users' );
+		return $users->count($filter);
+	}
+
 	public function getUsersListByPage($page=null, $limit=null, $condition=null){
 		$users = $this->getModel ( 'Users' );
 		$filter= null;
@@ -323,12 +193,6 @@ public function totalCount($filter=null ) {
 	// Login Check
 	// -----------------------------------------------------------
 	
-	/**
-	 *
-	 * @param
-	 *        	$session
-	 * @return mixed
-	 */
 	public function getUserBySession($session) {
 		$users = $this->getModel ( 'Users' );
 		if (isset ( $session ['login_id'] )) {
