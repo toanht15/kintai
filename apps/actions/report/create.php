@@ -31,13 +31,11 @@ class create extends aafwPOSTActionBase {
 		{					
 			return 'redirect: /user/login';
 		}
-		// if ($this->User) {
-		// 	return 'redirect: /user/register';
-		// }
-		// if ($this->SERVER['REQUEST_METHOD'] == 'GET') {
-		// 	return 'Invalid information';
-		// }
-		// return true;
+
+		if ($this->SERVER['REQUEST_METHOD'] == 'GET') {
+			return 'Invalid information';
+		}
+		return true;
 	}
 	
 	public function validate() {

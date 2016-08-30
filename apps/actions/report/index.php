@@ -19,8 +19,6 @@ class index extends aafwGETActionBase {
 	}
 
 	public function doAction() {
-		//$user_service = $this->createService('UserService');
-		//$user = $user_service->getUserBySession($this->SESSION);
 
 		$service = $this->createService('ReportService');
 		$total_count = $service->countAllReport();

@@ -98,6 +98,18 @@ class UserService extends aafwServiceBase {
 		$condition = array('day'=> date('Y-m-d'));
 		return $db->getAllUserInfo($condition);
 	}
+
+	public function getUsersCheckedInByDate($date){
+		$db = new aafwDataBuilder();
+		$condition = array('day'=> $date);
+		return $db->getAllUserInfo($condition);
+	}
+
+	public function getUsersNotCheckInByDate($date){
+		$db = new aafwDataBuilder();
+		$condition = array('day'=> $date);
+		return $db->getAllUserNotCheckIn($condition);
+	}
 	
 	public function getAllUserNotCheckIn(){
 		$db = new aafwDataBuilder();

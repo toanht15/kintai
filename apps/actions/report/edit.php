@@ -32,12 +32,6 @@ class edit extends aafwPOSTActionBase {
 		$service = $this->createService('ReportService');
 		$report = $service->getReportById($this->report_id);
 
-		// $user_service =$this->createService('UserService');
-		// $user = $user_service->getUserBySession($this->SESSION);
-
-		// $check = $service->checkReportUser($report, $user);
-
-		// $this->Data['check'] = $check;
 		$this->Data['report'] = $report;	
 		
 		return 'report/edit.php';
