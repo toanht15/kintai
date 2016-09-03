@@ -36,7 +36,7 @@ class update_password extends aafwPOSTActionBase {
 	}
 	
 	$service = $this->createService('UserService');
-	$user = $service->getUserBySession($this->SESSION);
+	$user    = $service->getUserBySession($this->SESSION);
 	$service->changePassword($user, $this->password);
 	$this->Data['flash_message'] = "Change password successfull.";
 		return 'user/changePassword.php';

@@ -16,7 +16,7 @@ class checkout extends aafwGETActionBase {
 		$service = $this->createService('TimeSheetService');
         $timesheet = $service->updateCheckOutTime($user);
 
-        return 'redirect: /timesheet/index?checked_out=1';
+        return 'redirect: /timesheet/index?status=4';
     }
 
 		return 'redirect: /timesheet/index';

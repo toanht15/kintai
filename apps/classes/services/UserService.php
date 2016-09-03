@@ -55,7 +55,7 @@ class UserService extends aafwServiceBase {
         // $user->status = 0;
         $user->password = $this->getEmailHash($email, $password);
         // $user->last_login = date('Y/m/d H:i:s');
-        $users->save($user);        
+        $users->save($user);
         return $user;
     }
 
@@ -79,7 +79,7 @@ class UserService extends aafwServiceBase {
             if($result->check_out_time != "0000-00-00 00:00:00")
                 return true;
         }
-        return false;       
+        return false;
     }
 
     public function hasReport($user){
@@ -94,6 +94,24 @@ class UserService extends aafwServiceBase {
 
         return false;
     }
+
+    public function getStatus($user){
+        $status = new stdClass();
+        if ($this->getTodayTimeSheet($user)) {
+            $status->checked_in = true;
+        }
+
+        if ($this->isCheckedOut($user)) {
+            $status->checked_out = true;
+        }
+
+        if ($this->hasReport($user)) {
+            $status->has_report = true;
+        }
+
+        return $status;
+    }
+
 
     public function getAllUserCheckedIn(){
         $db = new aafwDataBuilder();
@@ -112,7 +130,7 @@ class UserService extends aafwServiceBase {
         $condition = array('day'=> $date);
         return $db->getAllUserNotCheckIn($condition);
     }
-    
+
     public function getAllUserNotCheckIn(){
         $db = new aafwDataBuilder();
         $condition = array('day'=> date('Y-m-d'));
@@ -132,7 +150,7 @@ class UserService extends aafwServiceBase {
 
         return $report;
     }
-    
+
     public function changePassword($user, $newPassword) {
         $users = $this->getModel('Users');
         $user = $this->getUserByEmail($user->email);
@@ -141,14 +159,14 @@ class UserService extends aafwServiceBase {
         $users->save($user);
         return $user;
     }
-    
+
     public function getUserById($id) {
         $users = $this->getModel ( 'Users' );
         return $users->findOne ( array (
-            'id' => $id 
+            'id' => $id
             ) );
     }
-    
+
     public function deleteUser($id){
         $users = $this->getModel ( 'Users' );
         $user = $this->getUserById($id);
@@ -214,15 +232,16 @@ class UserService extends aafwServiceBase {
         return $all_users;
     }
 
+
     // -----------------------------------------------------------
     // Login Check
     // -----------------------------------------------------------
-    
+
     public function getUserBySession($session) {
         $users = $this->getModel ( 'Users' );
         if (isset ( $session ['login_id'] )) {
             return $users->findOne ( array (
-                'id' => $session ['login_id'] 
+                'id' => $session ['login_id']
                 ) );
         }
     }

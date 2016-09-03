@@ -40,4 +40,26 @@ class TimeSheetService extends aafwServiceBase {
         $timesheets = $this->getModel('TimeSheets');
         return $timesheets->find(array('order' => array('direction' => 'desc')));
     }
+
+    public function setFlashMessage($status) {
+        switch ($status) {
+        case '1':
+            return "Login successfully.";
+                break;
+        case '2':
+            return "Check in successfull. Enjoy your working day.";
+                break;
+        case '3':
+            return "You have been checked in.";
+                break;
+        case '4':
+            return "Check out successfull.";
+                break;
+        case '5':
+            return "You have report today.";
+                break;
+        default:
+            break;
+        }
+    }
 }

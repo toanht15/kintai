@@ -17,7 +17,7 @@ class add extends aafwGETActionBase
             return 'redirect: /user/login';
         }
     }
-    
+
     public function doAction()
     {
         return '/report/add.php' ;

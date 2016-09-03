@@ -8,7 +8,7 @@
     ],
     "settings": {
         "xdebug": {
-             "url": "http://kintai-system.com/",
+             "url": "http://kintai-system.com",
         }
     }
 }

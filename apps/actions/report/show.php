@@ -12,7 +12,7 @@ class show extends aafwGETActionBase {
 
 	public function doThisFirst(){
 		if( !isset($_SESSION['login_id']) )
-		{					
+		{
 			return 'redirect: /user/login';
 		}
 	}
@@ -34,7 +34,7 @@ class show extends aafwGETActionBase {
 		$this->Data['date'] = $date;
 		$this->Data['user'] = $user;
 		$this->Data['report'] = $report;
-		
+
 		return 'report/show.php';
 	}
 }

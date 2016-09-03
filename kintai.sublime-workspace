@@ -4,57 +4,78 @@
 		"selected_items":
 		[
 			[
-				"aa",
-				"aafwDataBuilder"
+				"tim",
+				"timesheet"
 			],
 			[
-				"pri",
-				"print_r"
+				"fo",
+				"foreach	foreach …"
 			],
 			[
-				"bs3-ta",
-				"bs3-table:bordered	bs3-table-bordered"
+				"re",
+				"result"
 			],
 			[
-				"dum",
-				"dump	var_dump"
+				"ser",
+				"service"
 			],
 			[
-				"php",
-				"php	<?php … ?>"
+				"Rep",
+				"Reports"
 			],
 			[
 				"fun",
 				"function"
+			],
+			[
+				"user",
+				"user_service"
+			],
+			[
+				"Repo",
+				"Report"
+			],
+			[
+				"repor",
+				"reports"
+			],
+			[
+				"ti",
+				"timesheet"
+			],
+			[
+				"time",
+				"timesheet"
+			],
+			[
+				"arr",
+				"array"
 			]
 		]
 	},
 	"buffers":
 	[
 		{
+			"file": "apps/actions/timesheet/index.php",
+			"settings":
+			{
+				"buffer_size": 1386,
+				"line_ending": "Unix"
+			}
+		},
+		{
 			"file": "kintai.sublime-project",
 			"settings":
 			{
-				"buffer_size": 215,
+				"buffer_size": 225,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"contents": "<?php\nAAFW::import('jp.aainc.aafw.base.aafwPOSTActionBase');\nAAFW::import('jp.aainc.classes.entities.User');\nAAFW::import('jp.aainc.aafw.db.aafwDataBuilder');\n\nclass delete_user extends aafwPOSTActionBase {\n	public $Secure = true;\n	\n	 protected $ContainerName = 'index_user';\n	 protected $ErrorPage = 'redirect: /admin/index_user';\n	protected $Form = array(\n		'action' => 'index_user',\n		'package' => 'admin',\n	);\n	\n	protected $_ModelDefinitions = array(\n		'Users',\n	);\n\n	public function doThisFirst() {\n		if( !isset($_SESSION['login_id']) )\n		{					\n			return 'redirect: /user/login';\n		}\n\n		if ($this->SERVER['REQUEST_METHOD'] == 'GET') {\n			return 'Invalid information';\n		}\n		return true;	\n	}\n	\n	public function validate() {\n		return true;\n	}\n	\n	public function doAction() {	\n		$service = $this->createService('UserService');\n		$service->deleteUser($this->user_id);\n		return 'redirect: /admin/index_user?del=1';\n	}\n}",
-			"file": "apps/actions/admin/delete_user.php",
-			"file_size": 919,
-			"file_write_time": 131171784498158194,
+			"file": "/etc/php5/mods-available/xdebug.ini",
 			"settings":
 			{
-				"buffer_size": 920,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "/home/hnc/.config/sublime-text-3/Packages/User/phpcs.sublime-settings",
-			"settings":
-			{
-				"buffer_size": 2775,
+				"buffer_size": 186,
 				"line_ending": "Unix"
 			}
 		}
@@ -66,32 +87,88 @@
 	"build_varint": "",
 	"command_palette":
 	{
-		"height": 400.0,
-		"last_filter": "php",
+		"height": 357.0,
+		"last_filter": "insta",
 		"selected_items":
 		[
 			[
-				"php",
-				"PHP Coding Standards Fixer: Fix this file (PHP-CS-Fixer)"
+				"insta",
+				"Package Control: Install Package"
+			],
+			[
+				"boxy",
+				"Boxy Theme: Activation"
+			],
+			[
+				"remo",
+				"Package Control: Remove Package"
+			],
+			[
+				"re",
+				"Package Control: Remove Package"
+			],
+			[
+				"",
+				"Boxy Theme: Configuration"
+			],
+			[
+				"bo",
+				"Boxy Theme: Activation"
 			],
 			[
 				"in",
 				"Package Control: Install Package"
 			],
 			[
-				"phpcs",
-				"PHP Code Sniffer: Sniff this file"
+				"colorsu",
+				"Colorsublime: Install Theme"
+			],
+			[
+				"pack",
+				"Package Control: Remove Package"
+			],
+			[
+				"pa",
+				"Package Control: Remove Package"
+			],
+			[
+				"colo",
+				"Colorsublime: Install Theme"
+			],
+			[
+				"packa",
+				"Package Control: Remove Package"
+			],
+			[
+				"di",
+				"Package Control: Disable Package"
+			],
+			[
+				"dis",
+				"Package Control: Disable Package"
 			],
 			[
 				"i",
-				"Indentation: Reindent Lines"
+				"Package Control: Install Package"
 			],
 			[
-				"inst",
+				"intsall",
+				"Package Control: Install Package"
+			],
+			[
+				"list",
+				"Package Control: List Packages"
+			],
+			[
+				"instal",
+				"Package Control: Install Package"
+			],
+			[
+				"ins",
 				"Package Control: Install Package"
 			]
 		],
-		"width": 601.0
+		"width": 575.0
 	},
 	"console":
 	{
@@ -113,101 +190,82 @@
 	"expanded_folders":
 	[
 		"/var/www/kintai",
-		"/var/www/kintai/apps",
-		"/var/www/kintai/apps/actions",
-		"/var/www/kintai/apps/actions/admin"
+		"/var/www/kintai/docroot"
 	],
 	"file_history":
 	[
-		"/home/hnc/workspace/brandco_dev/brandco/apps/config/google.yml",
-		"/home/hnc/workspace/brandco_dev/brandco/apps/classes/batch/MailQueueMailSender.php",
-		"/home/hnc/workspace/brandco_dev/brandco/apps/classes/MailManager.php",
-		"/var/www/info-sharing/apps/classes/services/UserService.php",
-		"/etc/hosts",
-		"/var/www/info-sharing/apps/lib/aafwValidator.php",
-		"/var/www/info-sharing/apps/lib/aafwErrorMessages.php",
-		"/var/www/kintai/apps/widgets/classes/AdminFooter.php",
-		"/var/www/kintai/apps/widgets/classes/AdminHeader.php",
-		"/var/www/kintai/apps/classes/services/UserService.php",
-		"/var/www/kintai/apps/lib/db/aafwSQLEditor.php",
-		"/var/www/kintai/apps/views/timesheet/index.php",
-		"/var/www/kintai/apps/actions/user/authenticate.php",
-		"/var/www/kintai/apps/views/report/index.php",
-		"/var/www/kintai/apps/actions/setAdmin.php",
-		"/var/www/kintai/apps/actions/timesheet/index.php",
+		"/var/www/kintai/kintai.sublime-project",
+		"/home/toanht15/.config/sublime-text-3/Packages/Xdebug Client/Xdebug.sublime-settings",
+		"/home/toanht15/.config/sublime-text-3/Packages/User/Xdebug.sublime-settings",
+		"/var/www/info.php",
+		"/home/toanht15/.config/sublime-text-3/Packages/Default/Default (Linux).sublime-keymap",
+		"/var/www/kintai/apps/actions/admin/reset_password.php",
+		"/home/toanht15/.config/sublime-text-3/Packages/User/phpcs.sublime-settings",
+		"/home/toanht15/.config/sublime-text-3/Packages/User/SublimeLinter/brogrammer (SL).tmTheme",
+		"/home/toanht15/.config/sublime-text-3/Packages/Colorsublime - Themes/MarsPeacock.tmTheme",
+		"/home/toanht15/.config/sublime-text-3/Packages/User/Color Highlighter/themes/brogrammer (SL).tmTheme",
+		"/home/toanht15/.config/sublime-text-3/Packages/Colorsublime - Themes/cache/Colorsublime-Themes-master/themes/Brogrammer.tmTheme",
+		"/var/www/kintai/apps/actions/admin/index_user.php",
+		"/var/www/kintai/apps/lib/base/aafwActionBase.php",
+		"/var/www/kintai/apps/actions/report/show.php",
+		"/var/www/kintai/apps/actions/report/index.php",
+		"/home/toanht15/.config/sublime-text-3/Packages/User/Preferences.sublime-settings",
+		"/home/toanht15/.config/sublime-text-3/Packages/User/Base File.sublime-settings",
+		"/home/toanht15/.config/sublime-text-3/Packages/User/SublimeCodeIntel.sublime-settings",
+		"/home/toanht15/.config/sublime-text-3/Packages/User/Default (Linux).sublime-keymap",
 		"/var/www/kintai/apps/actions/timesheet/create.php",
-		"/var/www/kintai/apps/widgets/templates/UserHeader.php",
+		"/var/www/kintai/apps/actions/admin/delete_user.php",
+		"/var/www/kintai/apps/actions/admin/index.php",
+		"/var/www/kintai/apps/views/user/index_reports.php",
+		"/var/www/kintai/apps/actions/admin/search.php",
+		"/var/www/kintai/apps/classes/entities/Report.php",
+		"/var/www/kintai/apps/actions/admin/set_admin.php",
+		"/var/www/kintai/apps/actions/report/add.php",
+		"/home/toanht15/.config/sublime-text-3/Packages/TrailingSpaces/trailing_spaces.sublime-settings",
+		"/var/www/kintai/apps/actions/report/update.php",
+		"/home/toanht15/.config/sublime-text-3/Packages/User/trailing_spaces.sublime-settings",
+		"/home/toanht15/.config/sublime-text-3/Packages/TrailingSpaces/README.md",
+		"/var/www/kintai/apps/actions/user/update_password.php",
+		"/var/www/kintai/apps/actions/user/register.php",
+		"/var/www/kintai/apps/actions/user/authenticate.php",
 		"/var/www/kintai/apps/actions/timesheet/checkout.php",
-		"/var/www/kintai/apps/actions/user/login.php",
-		"/var/www/kintai/apps/views/user/login.php",
-		"/home/hnc/.config/sublime-text-3/Packages/User/php.sublime-snippet",
-		"/var/www/kintai/docroot/js/dest/all-min.js",
-		"/var/www/info-sharing/apps/actions/post/post_detail.php",
-		"/var/www/info-sharing/apps/lib/base/aafwPOSTActionBase.php",
-		"/var/www/info-sharing/apps/lib/base/aafwEntityBase.php",
-		"/home/hnc/Downloads/bootstrap-3.3.7-dist/css/bootstrap.min.css",
-		"/var/www/info-sharing/apps/lib/base/aafwActionBase.php",
-		"/var/www/info-sharing/apps/lib/base/aafwValidatorBase.php",
-		"/var/www/info-sharing/apps/lib/base/aafwObject.php",
-		"/var/www/kintai/docroot/css/src/style.css",
-		"/var/www/kintai/docroot/index.php",
-		"/etc/apache2/sites-available/kintai.conf",
-		"/var/www/info-sharing/apps/lib/parsers/YAMLParser.php",
-		"/var/www/info-sharing/apps/lib/web/aafwController.php",
-		"/var/www/info-sharing/apps/actions/index.php",
-		"/var/www/info-sharing/apps/lib/AAFW.php",
-		"/var/www/info-sharing/apps/lib/base/aafwParserBase.php",
-		"/var/www/fbpost/apps/actions/cli/send_alert_new_comment_email.php",
-		"/var/www/fbpost/apps/actions/manage_page.php",
-		"/var/www/fbpost/apps/lib/base/aafwPhysicalEntityBase.php",
-		"/var/www/fbpost/apps/lib/web/aafwWidgetBase.php",
-		"/var/www/fbpost/apps/lib/base/aafwEntityBase.php",
-		"/var/www/fbpost/apps/vendor/facebook/FacebookFactory.php",
-		"/var/www/fbpost/apps/actions/process_facebook_login.php",
-		"/var/www/fbpost/apps/plugins/controller/URLParameter.php",
-		"/etc/apache2/sites-available/fbpost.conf",
-		"/var/www/fbpost/apps/config/app.yml",
-		"/etc/apache2/sites-available/000-default.conf",
-		"/var/www/html/fbpost/apps/plugins/controller/URLParameter.php",
-		"/var/www/html/fbpost/apps/actions/index.php",
-		"/var/www/html/fbpost/apps/lib/base/aafwEntityStoreBase.php",
-		"/var/www/html/fbpost/apps/lib/web/aafwController.php",
-		"/var/www/html/fbpost/docroot/index.php",
-		"/var/www/html/fbpost/apps/views/index.php",
-		"/var/www/html/fbpost/apps/actions/cli/request_facebook_post_data.php",
-		"/var/www/html/info.php",
+		"/var/www/kintai/apps/actions/user/create_user.php",
+		"/var/www/kintai/apps/lib/base/aafwObject.php",
+		"/var/www/kintai/apps/lib/base/aafwPOSTActionBase.php",
+		"/var/www/kintai/apps/lib/base/aafwException.php",
+		"/home/toanht15/.config/sublime-text-3/Packages/SublimeCodeIntel/SublimeCodeIntel.sublime-settings",
+		"/home/toanht15/.config/sublime-text-3/Packages/Alignment/Base File.sublime-settings",
+		"/var/www/kintai/apps/actions/timesheet/index.php",
+		"/var/www/kintai/apps/classes/services/ReportService.php",
+		"/var/www/kintai/apps/lib/base/aafwEntityStoreBase.php",
+		"/home/toanht15/.config/sublime-text-3/Packages/Alignment/Default (Linux).sublime-keymap",
+		"/var/www/kintai/apps/views/report/index.php",
+		"/var/www/kintai/apps/actions/report/create.php",
+		"/var/www/kintai/apps/views/timesheet/index.php",
+		"/var/www/kintai/apps/views/report/add.php",
+		"/var/www/kintai/apps/config/web.yml",
+		"/var/www/kintai/apps/classes/services/TimeSheetService.php",
+		"/var/www/kintai/apps/views/report/create.php",
+		"/var/www/kintai/apps/classes/stores/Reports.php",
+		"/home/toanht15/.config/sublime-text-3/Packages/User/vardump.sublime-snippet",
+		"/var/www/kintai/apps/lib/base/aafwValidatorBase.php",
+		"/var/www/kintai/apps/lib/base/aafwGETActionBase.php",
+		"/var/www/kintai/apps/classes/entities/TimeSheet.php",
+		"/home/toanht15/PhpStorm-162.1121.38/plugins/textmate/lib/themes/dark.icls",
+		"/etc/hosts",
 		"/etc/apache2/mods-enabled/dir.conf",
-		"/var/www/html/index.html",
-		"/var/www/html/fbpost/apps/config/app.yml",
-		"/var/www/html/fbpost/db_fbpostmon2.sql",
-		"/var/www/html/fbpost/apps/config/define.php",
-		"/var/www/html/fbpost/apps/actions/manage_page.php",
-		"/var/www/html/fbpost/apps/config/web.yml",
-		"/var/www/html/fbpost/docroot/.htaccess",
-		"/var/www/html/fbpost/apps/views/csv_download.php",
-		"/var/www/html/fbpost/apps/lib/base/aafwActionBase.php",
-		"/var/www/html/fbpost/apps/actions/cli/request_facebook_all_post_data.php",
-		"/var/www/html/fbpost/apps/classes/stores/Admins.php",
-		"/var/www/html/fbpost/apps/classes/entities/Admin.php",
-		"/var/www/html/fbpost/apps/sh/batch.sh",
-		"/home/hnc/.config/sublime-text-3/Packages/User/Preferences.sublime-settings",
-		"/etc/apache2/apache2.conf",
-		"/etc/php5/cli/php.ini",
-		"/etc/php5/apache2/php.ini"
+		"/var/www/html/info.php"
 	],
 	"find":
 	{
-		"height": 25.0
+		"height": 26.0
 	},
 	"find_in_files":
 	{
 		"height": 104.0,
 		"where_history":
 		[
-			"/home/hnc/workspace/brandco_dev/brandco",
-			"/var/www/info-sharing",
-			"/var/www/fbpost",
-			""
+			"/var/www/kintai/apps"
 		]
 	},
 	"find_state":
@@ -215,27 +273,11 @@
 		"case_sensitive": false,
 		"find_history":
 		[
-			"search",
-			"FromAddress",
-			"const",
-			"NeedLoginAdmin",
-			"getFacebookCommentByPage",
-			"all_categories",
-			"getUserBySession",
-			"session_regenerate_id",
-			"ContainerName",
-			"docroot",
-			"404 Not Found",
-			"404 Not Found\n404 Not Found\n404 Not Found\n404 Not Found\n404 Not Found\n404 Not Found\n404 Not Found\n404 Not Found\n404 Not Found\n404 Not Found\n404 Not",
-			"debug",
-			"aafwObject",
-			"APP_ID",
-			"redirect",
-			"DEFAULT CURRENT_TIMESTAMP",
-			"datetime",
-			"NOW",
-			"CURRENT_TIMESTAMP",
-			"display_error"
+			"eol",
+			"REQUEST_METHOD",
+			"font",
+			"find",
+			"textarea"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -243,10 +285,6 @@
 		"regex": false,
 		"replace_history":
 		[
-			"",
-			"timestamp",
-			"NOW()",
-			"NOW"
 		],
 		"reverse": false,
 		"show_context": true,
@@ -262,24 +300,23 @@
 			[
 				{
 					"buffer": 0,
-					"file": "kintai.sublime-project",
+					"file": "apps/actions/timesheet/index.php",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 215,
+						"buffer_size": 1386,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								194,
-								194
+								1347,
+								1347
 							]
 						],
 						"settings":
 						{
-							"auto_complete": true,
 							"bracket_highlighter.busy": false,
 							"bracket_highlighter.locations":
 							{
@@ -287,8 +324,126 @@
 								{
 									"1":
 									[
-										195,
-										196
+										1382,
+										1383
+									]
+								},
+								"icon":
+								{
+									"1":
+									[
+										"Packages/BracketHighlighter/icons/curly_bracket.png",
+										"brackethighlighter.default"
+									]
+								},
+								"open":
+								{
+									"1":
+									[
+										345,
+										346
+									]
+								},
+								"unmatched":
+								{
+								}
+							},
+							"bracket_highlighter.regions":
+							[
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content"
+							],
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 102.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "kintai.sublime-project",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 225,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								205,
+								205
+							]
+						],
+						"settings":
+						{
+							"bracket_highlighter.busy": false,
+							"bracket_highlighter.locations":
+							{
+								"close":
+								{
+									"1":
+									[
+										205,
+										206
 									]
 								},
 								"icon":
@@ -313,41 +468,46 @@
 							},
 							"bracket_highlighter.regions":
 							[
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
 								"bh_square",
 								"bh_square_center",
 								"bh_square_open",
 								"bh_square_close",
 								"bh_square_content",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
 								"bh_c_define",
 								"bh_c_define_center",
 								"bh_c_define_open",
 								"bh_c_define_close",
 								"bh_c_define_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
 								"bh_regex",
 								"bh_regex_center",
 								"bh_regex_open",
@@ -358,137 +518,15 @@
 								"bh_unmatched_open",
 								"bh_unmatched_close",
 								"bh_unmatched_content",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content"
-							],
-							"syntax": "Packages/JavaScript/JSON.sublime-syntax"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "apps/actions/admin/delete_user.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 920,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								693,
-								693
-							]
-						],
-						"settings":
-						{
-							"auto_complete": false,
-							"bracket_highlighter.busy": false,
-							"bracket_highlighter.locations":
-							{
-								"close":
-								{
-									"1":
-									[
-										695,
-										696
-									]
-								},
-								"icon":
-								{
-									"1":
-									[
-										"Packages/BracketHighlighter/icons/curly_bracket.png",
-										"brackethighlighter.default"
-									]
-								},
-								"open":
-								{
-									"1":
-									[
-										502,
-										503
-									]
-								},
-								"unmatched":
-								{
-								}
-							},
-							"bracket_highlighter.regions":
-							[
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content",
 								"bh_curly",
 								"bh_curly_center",
 								"bh_curly_open",
 								"bh_curly_close",
-								"bh_curly_content",
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content"
+								"bh_curly_content"
 							],
-							"syntax": "Packages/PHP/PHP.sublime-syntax",
-							"translate_tabs_to_spaces": false
+							"syntax": "Packages/JavaScript/JSON.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -499,50 +537,34 @@
 				},
 				{
 					"buffer": 2,
-					"file": "/home/hnc/.config/sublime-text-3/Packages/User/phpcs.sublime-settings",
+					"file": "/etc/php5/mods-available/xdebug.ini",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2775,
+						"buffer_size": 186,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2775,
-								2775
+								186,
+								186
 							]
 						],
 						"settings":
 						{
-							"auto_complete": true,
 							"bracket_highlighter.busy": false,
 							"bracket_highlighter.locations":
 							{
 								"close":
 								{
-									"1":
-									[
-										2774,
-										2775
-									]
 								},
 								"icon":
 								{
-									"1":
-									[
-										"Packages/BracketHighlighter/icons/curly_bracket.png",
-										"brackethighlighter.default"
-									]
 								},
 								"open":
 								{
-									"1":
-									[
-										0,
-										1
-									]
 								},
 								"unmatched":
 								{
@@ -550,41 +572,46 @@
 							},
 							"bracket_highlighter.regions":
 							[
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
 								"bh_square",
 								"bh_square_center",
 								"bh_square_open",
 								"bh_square_close",
 								"bh_square_content",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
 								"bh_c_define",
 								"bh_c_define_center",
 								"bh_c_define_open",
 								"bh_c_define_close",
 								"bh_c_define_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
 								"bh_regex",
 								"bh_regex_center",
 								"bh_regex_open",
@@ -595,20 +622,13 @@
 								"bh_unmatched_open",
 								"bh_unmatched_close",
 								"bh_unmatched_content",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content"
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content"
 							],
-							"syntax": "Packages/JavaScript/JSON.sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
+							"syntax": "Packages/Text/Plain text.tmLanguage"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -622,11 +642,11 @@
 	],
 	"incremental_find":
 	{
-		"height": 25.0
+		"height": 26.0
 	},
 	"input":
 	{
-		"height": 34.0
+		"height": 35.0
 	},
 	"layout":
 	{
@@ -657,13 +677,17 @@
 	},
 	"output.unsaved_changes":
 	{
-		"height": 110.0
+		"height": 116.0
+	},
+	"output.xdebug":
+	{
+		"height": 0.0
 	},
 	"pinned_build_system": "",
 	"project": "kintai.sublime-project",
 	"replace":
 	{
-		"height": 46.0
+		"height": 48.0
 	},
 	"save_all_on_build": true,
 	"select_file":
@@ -673,68 +697,24 @@
 		"selected_items":
 		[
 			[
-				"mailqueuemailsender",
-				"apps/classes/batch/MailQueueMailSender.php"
+				"aafwentitystorebase",
+				"apps/lib/base/aafwEntityStoreBase.php"
 			],
 			[
-				"s",
-				"config/schedule.rb"
+				"aafwobject",
+				"apps/lib/base/aafwObject.php"
 			],
 			[
-				"aafwsmtp",
-				"apps/lib/mail/aafwSMTP.php"
+				"aafwvalidatorbase",
+				"apps/lib/base/aafwValidatorBase.php"
 			],
 			[
-				"aafwmail",
-				"apps/lib/mail/aafwMail.php"
+				"aafwactionbase",
+				"apps/lib/base/aafwActionBase.php"
 			],
 			[
-				"mailmanager",
-				"apps/classes/MailManager.php"
-			],
-			[
-				"goog",
-				"apps/config/google.yml"
-			],
-			[
-				"sche",
-				"config/schedule.rb"
-			],
-			[
-				"he",
-				"apps/widgets/templates/UserHeader.php"
-			],
-			[
-				"head",
-				"apps/widgets/templates/UserHeader.php"
-			],
-			[
-				"aase",
-				"apps/lib/factory/aafwServiceFactory.php"
-			],
-			[
-				"parseba",
-				"apps/lib/base/aafwParserBase.php"
-			],
-			[
-				"yaml",
-				"apps/lib/parsers/YAMLParser.php"
-			],
-			[
-				"parse",
-				"apps/lib/base/aafwParserBase.php"
-			],
-			[
-				"erro",
-				"apps/lib/aafwErrorMessages.php"
-			],
-			[
-				"para",
-				"apps/plugins/controller/URLParameter.php"
-			],
-			[
-				"url",
-				"apps/plugins/controller/URLParameter.php"
+				"aafwgetactionbase",
+				"apps/lib/base/aafwGETActionBase.php"
 			]
 		],
 		"width": 0.0
@@ -750,22 +730,65 @@
 	},
 	"select_symbol":
 	{
-		"height": 0.0,
+		"height": 330.0,
 		"last_filter": "",
 		"selected_items":
 		[
+			[
+				"",
+				"getCorrectPaging"
+			]
 		],
-		"width": 0.0
+		"width": 400.0
 	},
 	"selected_group": 0,
 	"settings":
 	{
+		"xdebug":
+		{
+			"hide_conflict": false,
+			"restore_index":
+			{
+				"17":
+				{
+					"group": 0,
+					"index": 0
+				},
+				"29":
+				{
+					"group": 0,
+					"index": 1
+				}
+			},
+			"restore_layout":
+			{
+				"cells":
+				[
+					[
+						0,
+						0,
+						1,
+						1
+					]
+				],
+				"cols":
+				[
+					0.0,
+					1.0
+				],
+				"rows":
+				[
+					0.0,
+					1.0
+				]
+			}
+		}
 	},
 	"show_minimap": true,
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 383.0,
+	"side_bar_width": 406.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{

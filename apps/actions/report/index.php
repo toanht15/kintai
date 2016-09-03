@@ -13,18 +13,18 @@ class index extends aafwGETActionBase {
 
 	public function doThisFirst(){
 		if( !isset($_SESSION['login_id']) )
-		{					
+		{
 			return 'redirect: /user/login';
 		}
 	}
 
 	public function doAction() {
 
-		$service = $this->createService('ReportService');
+		$service     = $this->createService('ReportService');
 		$total_count = $service->countAllReport();
 
 
-		$this->Data['page_limited'] = self::PAGE_LIMIT;
+		$this->Data['page_limited']     = self::PAGE_LIMIT;
 		$this->Data['total_file_count'] = $total_count;
 		$total_page = floor($total_count / self::PAGE_LIMIT) + ($total_count % self::PAGE_LIMIT > 0);
 

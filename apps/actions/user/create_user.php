@@ -25,7 +25,7 @@ class create_user extends aafwPOSTActionBase {
 			),
 		'password' => array(
 			'required' => 1,
-			'type' => 'str',
+			'type'     => 'str',
 			)
 		);
 	
@@ -60,7 +60,7 @@ class create_user extends aafwPOSTActionBase {
 
 		$param = new User();
 		//$param->username = $this->username;
-		$param->email = $this->email;
+		$param->email    = $this->email;
 		$param->password = $this->password;	
 		//$user = $service->createUser($param);
 		$user = $service->createUser($this->email, $this->password);

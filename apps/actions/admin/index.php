@@ -19,7 +19,7 @@ class index extends aafwGETActionBase {
 		$user = $service->getUserBySession($this->SESSION);
 		if(!$user->isAdmin)
 			return 'redirect: /timesheet/index';
-		
+
 
 		$users_not_check_in = $service->getAllUserNotCheckIn();
 		$users_checked_in = $service->getAllUserCheckedIn();

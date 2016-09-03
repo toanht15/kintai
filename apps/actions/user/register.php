@@ -15,9 +15,9 @@ class register extends aafwGETActionBase {
 	}
 	
 	public function doAction() {
+		$user_service =$this->createService('UserService');
+		$user         = $user_service->getUserBySession($this->SESSION);
 
-		 $user_service =$this->createService('UserService');
-		 $user = $user_service->getUserBySession($this->SESSION);
 		 if(!$user->isAdmin)
 		 	die("Permission denied.");
 		// if ($this->User) {

@@ -54,6 +54,6 @@ class create extends aafwPOSTActionBase {
             return 'redirect: /report/show?id='.$report->id;
         }
 
-        return 'redirect: /timesheet/index?has_report=1';
+        return 'redirect: /timesheet/index?status=5';
     }
 }

@@ -5,21 +5,21 @@ AAFW::import('jp.aainc.aafw.db.aafwDataBuilder');
 
 class delete_user extends aafwPOSTActionBase {
 	public $Secure = true;
-	
+
 	 protected $ContainerName = 'index_user';
 	 protected $ErrorPage = 'redirect: /admin/index_user';
 	protected $Form = array(
 		'action' => 'index_user',
 		'package' => 'admin',
 	);
-	
+
 	protected $_ModelDefinitions = array(
 		'Users',
 	);
 
 	public function doThisFirst() {
 		if( !isset($_SESSION['login_id']) )
-		{					
+		{
 			return 'redirect: /user/login';
 		}
 
@@ -28,12 +28,12 @@ class delete_user extends aafwPOSTActionBase {
 		}
 		return true;
 	}
-	
+
 	public function validate() {
 		return true;
 	}
-	
-	public function doAction() {	
+
+	public function doAction() {
 		$service = $this->createService('UserService');
 		$service->deleteUser($this->user_id);
 		return 'redirect: /admin/index_user?del=1';
