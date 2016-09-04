@@ -4,38 +4,41 @@ AAFW::import('jp.aainc.classes.entities.User');
 AAFW::import('jp.aainc.aafw.db.aafwDataBuilder');
 
 class delete_user extends aafwPOSTActionBase {
-	public $Secure = true;
+    public $Secure = true;
 
-	 protected $ContainerName = 'index_user';
-	 protected $ErrorPage = 'redirect: /admin/index_user';
-	protected $Form = array(
-		'action' => 'index_user',
-		'package' => 'admin',
-	);
+    protected $ContainerName = 'index_user';
+    protected $ErrorPage     = 'redirect: /admin/index_user';
 
-	protected $_ModelDefinitions = array(
-		'Users',
-	);
+    protected $Form = array(
+                       'action'  => 'index_user',
+                       'package' => 'admin',
+                      );
 
-	public function doThisFirst() {
-		if( !isset($_SESSION['login_id']) )
-		{
-			return 'redirect: /user/login';
-		}
+    protected $_ModelDefinitions = array('Users');
 
-		if ($this->SERVER['REQUEST_METHOD'] == 'GET') {
-			return 'Invalid information';
-		}
-		return true;
-	}
+    public function doThisFirst() {
+        if (!isset($_SESSION['login_id'])) {
+            return 'redirect: /user/login';
+        }
 
-	public function validate() {
-		return true;
-	}
+        if (!isset($_SESSION['isAdmin'])) {
+            return 'redirect: /timsheet/index';
+        }
 
-	public function doAction() {
-		$service = $this->createService('UserService');
-		$service->deleteUser($this->user_id);
-		return 'redirect: /admin/index_user?del=1';
-	}
+        if ($this->SERVER['REQUEST_METHOD'] == 'GET') {
+            return 'Invalid information';
+        }
+
+        return true;
+    }
+
+    public function validate() {
+        return true;
+    }
+
+    public function doAction() {
+        $service = $this->createService('UserService');
+        $service->deleteUser($this->user_id);
+        return 'redirect: /admin/index_user?status=3';
+    }
 }

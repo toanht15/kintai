@@ -9,7 +9,8 @@ class ReportService extends aafwServiceBase {
     public $reports;
 
     public function __construct() {
-        $this->reports = $this->getModel('Reports');
+        $this->reports    = $this->getModel('Reports');
+        $this->timesheets = $this->getModel('TimeSheets');
     }
 
     public function createReport($report) {
@@ -17,15 +18,13 @@ class ReportService extends aafwServiceBase {
     }
 
     public function getAllReport() {
-        $reports = $this->getModel('Reports');
-        $report  = $reports->find(array('order' => array('direction' => 'desc')));
+        $report = $this->$reports->find(array('order' => array('direction' => 'desc')));
 
         return $report;
     }
 
     public function getAllReportWithInfo($params) {
         $db = new aafwDataBuilder();
-        // $condition = array('day'=> date('Y-m-d'));
         return $db->getAllReportInfo($params);
     }
 
@@ -36,8 +35,7 @@ class ReportService extends aafwServiceBase {
     }
 
     public function getUserOfReport($report) {
-        $timesheets = $this->getModel('TimeSheets');
-        $timesheet  = $timesheets->findOne(array('id' => $report->timesheet_id));
+        $timesheet = $this->$timesheets->findOne(array('id' => $report->timesheet_id));
 
         $users = $this->getModel('Users');
         $user  = $users->findOne(array('id' => $timesheet->user_id));
@@ -46,15 +44,13 @@ class ReportService extends aafwServiceBase {
     }
 
     public function getReportById($id) {
-        $reports = $this->getModel('Reports');
-        $report  = $reports->findOne(array('id' => $id));
+        $report = $this->$reports->findOne(array('id' => $id));
 
         return $report;
     }
 
     public function getDateOfReport($report) {
-        $timesheets = $this->getModel('TimeSheets');
-        $timesheet  = $timesheets->findOne(array('id' => $report->timesheet_id));
+        $timesheet = $this->$timesheets->findOne(array('id' => $report->timesheet_id));
 
         return $timesheet->day;
     }

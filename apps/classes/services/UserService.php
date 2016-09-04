@@ -8,6 +8,12 @@ class UserService extends aafwServiceBase {
     const STRETCH_COUNT = 5;
     const FIXED_SALT    = 'edc21dc921dcc1285d9b740b833af2c72bc0afc960b48ae5c9d00c14bda400bb';
 
+    public function __construct() {
+        $this->users     = $this->getModel('Users');
+        $this->db        = new aafwDataBuilder();
+        $this->condition = array('day' => date('Y-m-d'));
+    }
+
     private function getSalt($email) {
         return $email.pack('H*', self::FIXED_SALT);
     }
@@ -23,21 +29,20 @@ class UserService extends aafwServiceBase {
     }
 
     public function getUserByEmail($email) {
-        $users = $this->getModel('Users');
-        return $users->findOne(array('email' => $email));
+        return $this->users->findOne(array('email' => $email));
     }
 
     public function updateLastLogin($user) {
         $users            = $this->getModel('Users');
         $user->last_login = date('Y/m/d H:i:s');
-        $users->save($user);
+        $this->users->save($user);
     }
 
 
     public function authenticate($email, $password) {
         $password = $this->getEmailHash($email, $password);
         $users    = $this->getModel('Users');
-        $user     = $users->findOne(
+        $user     = $this->users->findOne(
             array(
              'email'    => $email,
              'password' => $password,
@@ -47,55 +52,55 @@ class UserService extends aafwServiceBase {
     }
 
     public function createUser($email, $password) {
-        $users = $this->getModel('Users');
-        $user  = new User();
-        // $user->username = $username;
-        $user->email = $email;
-        // $user->profile_picture = '/img/member_avata/default.gif';
-        // $user->status = 0;
+        $users          = $this->getModel('Users');
+        $user           = new User();
+        $user->email    = $email;
         $user->password = $this->getEmailHash($email, $password);
-        // $user->last_login = date('Y/m/d H:i:s');
-        $users->save($user);
+        $this->users->save($user);
+
         return $user;
     }
 
     public function getAllUser() {
-        $users = $this->getModel('Users');
-        return $users->find(array('order'=>array('direction'=>'desc')));
+        return $this->users->find(array('order' => array('direction' => 'desc')));
     }
 
-    public function getTodayTimeSheet($user){
+    public function getTodayTimeSheet($user) {
         $timesheets = $this->getModel('TimeSheets');
-        return $timesheets->findOne(array(
-            'user_id'=>$user->id,
-            'day' => date('Y-m-d')
-            ));
+        return $timesheets->findOne(
+            array(
+             'user_id' => $user->id,
+             'day'     => date('Y-m-d'),
+            )
+        );
     }
 
-    public function isCheckedOut($user){
-        $timesheets = $this->getModel('TimeSheets');
+    public function isCheckedOut($user) {
         $result = $this->getTodayTimeSheet($user);
-        if($result){
-            if($result->check_out_time != "0000-00-00 00:00:00")
+        if ($result) {
+            if ($result->check_out_time != "0000-00-00 00:00:00") {
                 return true;
+            }
         }
+
         return false;
     }
 
-    public function hasReport($user){
-        $timesheets = $this->getModel('TimeSheets');
+    public function hasReport($user) {
         $result = $this->getTodayTimeSheet($user);
 
-        if($result){
+        if ($result) {
             $reports = $this->getModel('Reports');
-            $report = $reports->findOne(array('timesheet_id' => $result->id));
-            if($report) return true;
+            $report  = $reports->findOne(array('timesheet_id' => $result->id));
+            if ($report) {
+                return true;
+            }
         }
 
         return false;
     }
 
-    public function getStatus($user){
+    public function getStatus($user) {
         $status = new stdClass();
         if ($this->getTodayTimeSheet($user)) {
             $status->checked_in = true;
@@ -112,137 +117,109 @@ class UserService extends aafwServiceBase {
         return $status;
     }
 
-
-    public function getAllUserCheckedIn(){
-        $db = new aafwDataBuilder();
-        $condition = array('day'=> date('Y-m-d'));
-        return $db->getAllUserInfo($condition);
+    public function setMessageAdminAction($status) {
+        switch ($status) {
+        case '1':
+            return 'Update successfull.';
+                break;
+        case '2':
+            return 'Password has been reseted successfull. New password is 123456';
+                break;
+        case '3':
+            return 'User has been deleted successfull.';
+                break;
+        default:
+            return false;
+                break;
+        }
     }
 
-    public function getUsersCheckedInByDate($date){
-        $db = new aafwDataBuilder();
-        $condition = array('day'=> $date);
-        return $db->getAllUserInfo($condition);
+
+    public function getAllUserCheckedIn() {
+        return $this->db->getAllUserInfo($this->condition);
     }
 
-    public function getUsersNotCheckInByDate($date){
-        $db = new aafwDataBuilder();
-        $condition = array('day'=> $date);
-        return $db->getAllUserNotCheckIn($condition);
+    public function getUsersCheckedInByDate($date) {
+        $condition = array('day' => $date);
+        return $this->db->getAllUserInfo($condition);
     }
 
-    public function getAllUserNotCheckIn(){
-        $db = new aafwDataBuilder();
-        $condition = array('day'=> date('Y-m-d'));
-        return $db->getAllUserNotCheckIn($condition);
+    public function getUsersNotCheckInByDate($date) {
+        $condition = array('day' => $date);
+        return $this->db->getAllUserNotCheckIn($condition);
     }
 
-    public function getAllRepostOfUser($user_id){
+    public function getAllUserNotCheckIn() {
+        return $this->db->getAllUserNotCheckIn($this->condition);
+    }
+
+    public function getAllReportOfUser($user_id) {
         $timesheets = $this->getModel('TimeSheets');
-        $timesheet = $timesheets->find(array('conditions'=>array('user_id'=>$user_id)));
+        $timesheet  = $timesheets->find(array('conditions' => array('user_id' => $user_id)));
+
         $arr = array();
         foreach ($timesheet as $t) {
             $arr[] = $t->id;
         }
 
         $reports = $this->getModel('Reports');
-        $report = $reports->find(array('conditions'=>array('timesheet_id'=>$arr)));
+        $report  = $reports->find(array('conditions' => array('timesheet_id' => $arr)));
 
         return $report;
     }
 
     public function changePassword($user, $newPassword) {
-        $users = $this->getModel('Users');
-        $user = $this->getUserByEmail($user->email);
-        $newPassword = $this->getEmailHash($user->email, $newPassword);
+        $user           = $this->getUserByEmail($user->email);
+        $newPassword    = $this->getEmailHash($user->email, $newPassword);
         $user->password = $newPassword;
-        $users->save($user);
+        $this->users->save($user);
+
         return $user;
     }
 
     public function getUserById($id) {
-        $users = $this->getModel ( 'Users' );
-        return $users->findOne ( array (
-            'id' => $id
-            ) );
+        return $this->users->findOne(array('id' => $id));
     }
 
-    public function deleteUser($id){
-        $users = $this->getModel ( 'Users' );
+    public function deleteUser($id) {
         $user = $this->getUserById($id);
         try {
-            $users->deletePhysical($user);
+            $this->users->deletePhysical($user);
         } catch (Exception $e) {
-            var_dump($e); exit(1);
+            var_dump($e);
+            exit(1);
         }
     }
 
-    public function setAdmin($id){
-        $users = $this->getModel ( 'Users' );
-        $user = $this->getUserById($id);
+    public function setAdmin($id) {
+        $user          = $this->getUserById($id);
         $user->isAdmin = true;
         try {
-            $users->save($user);
+            $this->users->save($user);
         } catch (Exception $e) {
-            var_dump($e); exit(1);
+            var_dump($e);
+            exit(1);
         }
     }
 
-    public function resetPassword($id){
-        $user = $this->getUserById($id);
+    public function resetPassword($id) {
+        $user        = $this->getUserById($id);
         $newPassword = '123456';
         return $this->changePassword($user, $newPassword);
     }
 
     public function totalCount($filter=null ) {
-        $users = $this->getModel ( 'Users' );
-        return $users->count($filter);
+        return $this->users->count($filter);
     }
 
-    public function getUsersByPage($param){
+    public function getUsersByPage($param) {
         $db = new aafwDataBuilder();
         return $db->getUsersByPage($param);
     }
 
-    public function getUsersListByPage($page=null, $limit=null, $condition=null){
-        $users = $this->getModel ( 'Users' );
-        $filter= null;
-        if($page != null && $limit != null){
-            $filter = array(
-                'conditions' => $condition,
-                'pager' => array(
-                    'page' => $page,
-                    'count' => $limit,
-                    ),
-                'order' => array(
-                    'name' => 'created_at',
-                    'direction' => 'asc',
-                    ),
-                );
-        }else{
-            $filter = array(
-                'conditions' => $condition,
-                'order' => array(
-                    'name' => 'created_at',
-                    'direction' => 'asc',
-                    ),
-                );
-        }
-        $all_users = $users->find($filter);
-        return $all_users;
-    }
-
-
-    // -----------------------------------------------------------
-    // Login Check
-    // -----------------------------------------------------------
-
     public function getUserBySession($session) {
-        $users = $this->getModel ( 'Users' );
-        if (isset ( $session ['login_id'] )) {
-            return $users->findOne ( array (
-                'id' => $session ['login_id']
-                ) );
+        if (isset($session['login_id'])) {
+            return $this->users->findOne(array('id' => $session['login_id']));
         }
     }
 }

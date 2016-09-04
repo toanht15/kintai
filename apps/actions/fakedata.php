@@ -44,6 +44,10 @@ class fakedata extends aafwGETActionBase {
 		// 	$report = $report_service->createReport($report);
 		// }
 
+		// foreach ($users as $user) {
+		// 	$timesheet_service->updateCheckOutTime($user);
+		// }
+
 		echo "Fake data successfully";
 	}
 }

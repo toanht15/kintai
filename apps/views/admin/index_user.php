@@ -11,8 +11,8 @@
                 <th>ID</th>
                 <th>Email</th>
                 <th>Date Created</th>
-                <th>Role</th> 
-                <th>Action</th>                       
+                <th>Role</th>
+                <th>Action</th>
             </tr>
         </thead>
         <tbody>
@@ -21,13 +21,13 @@
                     <td><?php echo $user['id']; ?></td>
                     <td><?php echo $user['email']; ?></td>
                     <td><?php echo $user['date_created']; ?></td>
-                    <td><?php if($user['isAdmin']) echo "Admin"; else echo "Normal"; ?></td>                 
+                    <td><?php if($user['isAdmin']) echo "Admin"; else echo "Normal"; ?></td>
                     <td>
                         <?php if(!$user['isAdmin']): ?>
                             <div class="row">
                                 <div class="col-md-2">
                                     <a href="<?php echo "/user/index_reports?user_id=".$user['id']."" ?>" class="btn btn-xs btn-primary">Daily-reports</a>
-                                </div>                           
+                                </div>
                                 <div class="col-md-2">
                                     <form action='set_admin' method='post'>
                                         <?php write_html($this->formHidden('user_id', $user['id'])) ?>
@@ -44,7 +44,7 @@
                                     <form action='delete_user' method='post'>
                                         <?php write_html($this->formHidden('user_id', $user['id'])) ?>
                                         <button class="btn btn-xs btn-danger" type="submit">Delete</button>
-                                    </form> 
+                                    </form>
                                 </div>
                             </div>
                         <?php endif; ?>
@@ -60,5 +60,5 @@
  'CurrentPage' => $this->params['p'],
  'Count' => $this->page_limited,
  ))) ?>
- 
+
  <?php write_html ( $this->Widgets->loadWidget( 'UserFooter' )->render () )?>

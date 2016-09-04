@@ -7,8 +7,8 @@
                 <th>ID</th>
                 <th>Email</th>
                 <th>Status</th>
-                <th>Check in time</th>          
-                <th>Check out time</th>          
+                <th>Check in time</th>
+                <th>Check out time</th>
             </tr>
         </thead>
         <tbody>
