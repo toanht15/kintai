@@ -15,7 +15,8 @@ require_once 'AAFW.php';
 require_once 'aafwFunctions.php';
 require_once 'aafwAutoLoader.php';
 AAFW::start ();
-AAFW::import ( 'jp.aainc.aafw.aafwApplicationConfig' );
+AAFW::import('jp.aainc.aafw.aafwApplicationConfig');
+AAFW::import('jp.aainc.classes.Helpers');
 
 define("APP_ID", "1083705325015701");   //1083705325015701
 define("APP_SECRET", "47d2c46a0b00db3dabc32e203ea4c28b");  //47d2c46a0b00db3dabc32e203ea4c28b

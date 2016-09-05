@@ -14,7 +14,7 @@ class TimeSheetService extends aafwServiceBase {
         $timesheet          = new TimeSheets();
         $timesheet->user_id = $user_id;
         $timesheet->day     = date('Y-m-d');
-        $this->$timesheets->save($timesheet);
+        $this->timesheets->save($timesheet);
         return $timesheet;
     }
 
@@ -22,7 +22,7 @@ class TimeSheetService extends aafwServiceBase {
         $timesheet = $this->getTimeSheet($user);
         $timesheet->check_out_time = date('Y-m-d H:i:s');
         $timesheet->status         = 'Checked out';
-        $this->$timesheets->save($timesheet);
+        $this->timesheets->save($timesheet);
         return $timesheet;
     }
 
@@ -34,7 +34,7 @@ class TimeSheetService extends aafwServiceBase {
     }
 
     public function getTimeSheet($user) {
-        return $this->$timesheets->findOne(
+        return $this->timesheets->findOne(
             array(
              'user_id' => $user->id,
              'day'     => date('Y-m-d'),
@@ -43,28 +43,6 @@ class TimeSheetService extends aafwServiceBase {
     }
 
     public function getAllTimeSheet() {
-        return $this->$timesheets->find(array('order' => array('direction' => 'desc')));
-    }
-
-    public function setFlashMessage($status) {
-        switch ($status) {
-        case '1':
-            return "Login successfully.";
-                break;
-        case '2':
-            return "Check in successfull. Enjoy your working day.";
-                break;
-        case '3':
-            return "You have been checked in.";
-                break;
-        case '4':
-            return "Check out successfull.";
-                break;
-        case '5':
-            return "You have report today.";
-                break;
-        default:
-            break;
-        }
+        return $this->timesheets->find(array('order' => array('direction' => 'desc')));
     }
 }

@@ -1,0 +1,14 @@
+user:
+  login: Login successfully.
+  logout: Logout successfully.
+
+timesheet:
+  check_in: Check in successfull. Enjoy your working day.
+  checked_in: You have been checked in.
+  check_out: Check out successfully.
+  has_report: You have report today.
+
+admin:
+  update: Update successfull.
+  password_reset: Password has been reseted successfull. New password is 123456.
+  delete: User has been deleted successfull.

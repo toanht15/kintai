@@ -33,7 +33,6 @@ class UserService extends aafwServiceBase {
     }
 
     public function updateLastLogin($user) {
-        $users            = $this->getModel('Users');
         $user->last_login = date('Y/m/d H:i:s');
         $this->users->save($user);
     }
@@ -41,7 +40,6 @@ class UserService extends aafwServiceBase {
 
     public function authenticate($email, $password) {
         $password = $this->getEmailHash($email, $password);
-        $users    = $this->getModel('Users');
         $user     = $this->users->findOne(
             array(
              'email'    => $email,
@@ -52,7 +50,6 @@ class UserService extends aafwServiceBase {
     }
 
     public function createUser($email, $password) {
-        $users          = $this->getModel('Users');
         $user           = new User();
         $user->email    = $email;
         $user->password = $this->getEmailHash($email, $password);
@@ -116,24 +113,6 @@ class UserService extends aafwServiceBase {
 
         return $status;
     }
-
-    public function setMessageAdminAction($status) {
-        switch ($status) {
-        case '1':
-            return 'Update successfull.';
-                break;
-        case '2':
-            return 'Password has been reseted successfull. New password is 123456';
-                break;
-        case '3':
-            return 'User has been deleted successfull.';
-                break;
-        default:
-            return false;
-                break;
-        }
-    }
-
 
     public function getAllUserCheckedIn() {
         return $this->db->getAllUserInfo($this->condition);

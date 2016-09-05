@@ -19,7 +19,11 @@ class search extends aafwGETActionBase {
 		$user = $service->getUserBySession($this->SESSION);
 		if(!$user->isAdmin)
 			return 'redirect: /timesheet/index';
+<<<<<<< HEAD
 		
+=======
+
+>>>>>>> 60216805e16e409b4f783e28e66c441b63d2f020
 		$users_checked_in = $service->getUsersCheckedInByDate('2016-08-23');
 		$users_not_check_in = $service->getUsersNotCheckInByDate('2016-08-23');
 
