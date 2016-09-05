@@ -9,13 +9,13 @@
 		</tr>
 	</thead>
 	<tbody>
-	<?php foreach ($this->reports as $report): ?> 	
+	<?php foreach ($this->reports as $report): ?>
 		<tr>
 			<td><?php echo $report->id; ?></td>
 			<td><?php echo $report->date_created; ?></td>
 			<td><a href="<?php echo "/report/show?id=".$report->id ?>" title="">View</a></td>
 		</tr>
-		<?php endforeach; ?>	
+		<?php endforeach; ?>
 	</tbody>
 </table>
 

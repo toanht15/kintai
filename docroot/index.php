@@ -1,5 +1,5 @@
 <?php
-require_once  dirname(__FILE__) . '/../apps/config/define.php';
+require_once  dirname(__FILE__) . '/../apps/config/define.php';	
 AAFW::import ( "jp.aainc.aafw.web.aafwController" );
 try{
   print aafwController::getInstance()->run();
